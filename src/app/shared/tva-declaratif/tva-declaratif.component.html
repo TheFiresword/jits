@@ -1,0 +1,485 @@
+<div class="global-declarative d-flex flex-column justify-content-center align-items-center pb-5">
+    <table class="table my-5  border border-2 border-ligth" role="presentation">
+        <tbody>
+            <tr class="">
+                <td>
+                    <img src="/assets/france.svg" alt="République française" class="bloc-marque" width="150px">
+                </td>
+                <td class="" style="width: 50%;">
+                    <span>DIRECTION GÉNÉRALE DES FINANCES PUBLIQUES</span><br><br>
+                    Taxe sur la valeur ajoutée et taxes assimilées<br>Régime du réel normal - mini réel<br>
+                    <span class="text-danger" style="font-size: large!important; text-align:center">Déclaration du mois de {{periodToDeclare[0]}} {{periodToDeclare[1]}}</span><br><br>
+                    <span>Concernant les mois de <span class="text-primary" *ngFor="let month of concernedMonths">{{month[0]}}-{{month[1]}} </span></span>
+                </td>
+                <td style="width: 20%;">
+                    <span>N°&nbsp;3310-CA3</span><br>
+                    <span>(Applicable à compter du 01/01/2023)</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+    <div>A - Montant des opérations réalisées</div>
+    <table class="n2 table " role="presentation">
+        <tbody>
+            <tr class="titre-rubrique last">
+                <th class="align-gauche" colspan="3">
+                    <div>OPÉRATIONS TAXEES (HT)</div>
+                </th>
+            </tr>
+            <tr id="R5" class="ligne">
+                <td class="cell-numero">
+                    <div class="libelle">
+                        <span>A1</span>
+                    </div>
+                </td>
+                <td class="cell-texte align-gauche" colspan="1">
+                    <div class="libelle">
+                        <span>Ventes, prestations de services</span>
+                        <ng-template #t1>
+                            <p class="text-start">
+                            Montant HT des ventes collectées(taxées) en France<br><hr>
+                            <li>Montant HT des ventes réalisées à des clients en France</li>
+                            <li>Montant HT des ventes réalisées à <span class="text-danger fs-large">des clients non assujetis d'UE et de DOM-TOM</span></li>                            
+                            </p>                            
+                        </ng-template>
+                        <button class="p-0 ms-3 infobulle btn" [ngbTooltip]="t1"  placement="right">
+                            <i class="bi bi-info-square"></i>
+                        </button>
+                    </div>
+                </td>
+                <td class="cell-data N15 align-gauche">
+                    <input type="text" id="A1" data-format="9(15)" class="champ" maxlength="15" [value]="inputsValues.A1" aria-label="Opérations imposables HT - Ventes, prestations de services">
+                </td>
+            </tr>            
+            <tr id="R63" class="ligne">
+                <td class="cell-numero">
+                    <div class="libelle">
+                        <span>A3</span>
+                    </div>
+                </td>
+                <td class="cell-texte align-gauche" colspan="1">
+                    <div class="libelle">
+                        <span>Achats de prestations de services réalisés auprès d'un assujetti non établi en France <i>(art 283-2 du code général des impôts) </i></span>
+                        <button class="p-0 ms-3 infobulle btn" ngbTooltip="Montant HT des achats de prestations de services fournies par un prestataire non établi en France (Dom-Tom compris) et imposables en France"  placement="right">
+                            <i class="bi bi-info-square"></i>
+                        </button>
+                    </div>
+                </td>
+                <td class="cell-data N15 align-gauche">
+                    <input type="text" id="A3" data-format="9(15)" class="champ" maxlength="15" [value]="inputsValues.A3" aria-label="Achats de prestations de services intracommunautaires (art 283-2 du code général des impôts) Base hors taxe">
+                </td>
+            </tr>
+            <tr id="R9" class="ligne">
+                <td class="cell-numero">
+                    <div class="libelle">
+                        <span>B2</span>
+                    </div>
+                </td>
+                <td class="cell-texte align-gauche" colspan="1">
+                    <div class="libelle">
+                        <span>Acquisitions intracommunautaires</span>
+                        <button class="p-0 ms-3 infobulle btn" ngbTooltip="Montant HT des achats de biens en UE(Hors France)"  placement="right">
+                            <i class="bi bi-info-square"></i>
+                        </button>
+                    </div>
+                </td>
+                <td class="cell-data N15 align-gauche">
+                    <input type="text" id="B2" data-format="9(15)" class="champ" maxlength="15" [value]="inputsValues.B2" aria-label="Opérations imposables - acquisitions intra-communautaires, base hors taxe"></td>
+            </tr>
+            <tr id="R18" class="ligne">
+                <td class="cell-numero">
+                <div class="libelle">
+                <span>B5</span>
+                </div>
+                </td><td class="cell-texte align-gauche" colspan="1">
+                <div class="libelle">
+                <span>Régularisations</span>
+                <ng-template #b5>
+                    <p class="text-start">
+                        Montant des correctifs qui ont affecté le montant du Chiffre d'Affaires<br><hr>
+                        <li>Erreurs ou omissions d'une opération</li>
+                        <li>Rabais</li>
+                        <li>Factures d'avoir accordées à des clients</li>
+                        <br>
+                        <span class="text-danger">NB:  Ne pas inscrire de montant négatif sur cette ligne !</span>
+                    </p>
+                </ng-template>
+                <button class="p-0 ms-3 infobulle btn" [ngbTooltip]="b5"  placement="right">
+                    <i class="bi bi-info-square"></i>
+                </button>
+                </div>
+                </td><td class="cell-data N15 align-gauche">
+                <input [(ngModel)]="inputsValues['B5']" placeholder="Remplissage manuel !!!" type="number" id="F8" data-format="9(15)" class="champ" maxlength="15" #B5></td>
+                </tr>
+            <tr class="titre-rubrique last">
+                <th class="align-gauche" colspan="3">
+                    <div>OPÉRATIONS NON TAXEES</div>
+                </th>
+            </tr>
+            
+            <tr id="R8" class="ligne">
+            <td class="cell-numero">
+            <div class="libelle">
+            <span>E2</span>
+            </div>
+            </td><td class="cell-texte align-gauche" colspan="1">
+            <div class="libelle">
+            <span>Autres opérations non imposables</span>
+            <ng-template #e2>
+                <p class="text-start">
+                    Montant HT des opérations non soumises à TVA (TVA=0)<br><hr>
+                    <li>Ventes en dehors de la France à des assujetis (entreprises)</li>
+                </p>
+            </ng-template>
+            <button class="p-0 ms-3 infobulle btn" [ngbTooltip]="e2"  placement="right">
+                <i class="bi bi-info-square"></i>
+            </button>
+            </div>
+            </td><td class="cell-data N15 align-gauche">
+            <input type="text" id="E2" data-format="9(15)" class="champ" maxlength="15" [value]="inputsValues.E2" aria-label="Autres opérations non imposables"></td>
+            </tr>                                
+            <tr id="R18" class="ligne">
+            <td class="cell-numero">
+            <div class="libelle">
+            <span>F8</span>
+            </div>
+            </td><td class="cell-texte align-gauche" colspan="1">
+            <div class="libelle">
+            <span>Régularisations</span>
+            <ng-template #f8>
+                <p class="text-start">
+                    Montant des correctifs liés aux opérations non imposables<br><hr>
+                    <li>Erreurs ou omissions d'une opération</li>
+                    <li>Rabais</li>
+                    <li>Factures d'avoir accordées à des clients</li>
+                    <br>
+                    <span class="text-danger">NB:  Ne pas inscrire de montant négatif sur cette ligne !</span>
+                </p>
+            </ng-template>
+            <button class="p-0 ms-3 infobulle btn" [ngbTooltip]="f8"  placement="right">
+                <i class="bi bi-info-square"></i>
+            </button>
+            </div>
+            </td><td class="cell-data N15 align-gauche">
+            <input placeholder="Remplissage manuel !!!" [(ngModel)]="inputsValues.F8" type="number" id="F8" data-format="9(15)" class="champ" maxlength="15" 
+                aria-label="Opérations non imposables - régularisations" #F8></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="mt-5">B - Décompte de la TVA à payer</div>    
+    <table class="n3 table " role="presentation">
+        <tbody>
+            <tr class="titre-rubrique last">
+                <th class="align-gauche" colspan="4">
+                <div>TVA BRUTE</div>
+                </th>
+            </tr>
+        <tr class="titre-rubrique last">
+            <th class="align-gauche" colspan="2">
+            <div>Opérations réalisées en France Métropolitaine</div>
+            </th>
+            <th>
+                <div>Base hors taxe</div>
+            </th>
+            <th>
+                <div>Taxe due</div>
+            </th>
+        </tr>
+        <tr id="R22" class="ligne">
+        <td class="cell-numero">
+        <div class="libelle">
+        <span>08</span>
+        </div>
+        </td><td class="cell-texte align-gauche" colspan="1">
+    <div class="libelle">
+    <span>Taux normal 20 %</span>
+    </div>
+    </td><td class="cell-data N15 align-gauche">
+    <div class="d-flex">
+        <ng-template #t08>
+            <p class="text-start">
+                Somme de :
+                <li>Montant HT des ventes collectées en France <i>A1</i></li>
+                <li>Achats de prestation de service hors France <i>A3</i></li>
+                <li>Acquisitions intracommunautaires <i>B2</i></li>
+                <li>Régularisations sur opérations taxables <i>B5</i></li>                                                
+            </p>
+        </ng-template>
+        <input type="text" id="08" data-format="9(15)" class="champ" [value]="inputsValues[8]" maxlength="15" value="0" aria-label="Opérations imposables au taux normal de 20% en France métropolitaine : base HT">
+        <button class="p-0 ms-3 infobulle btn" [ngbTooltip]="t08"  placement="right">
+            <i class="bi bi-info-square"></i>
+        </button>
+    </div>
+    </td>
+    <td class="cell-data N15 align-gauche">
+        <div class="d-flex">
+            <input type="text" id="A904066_0" data-format="9(15)" class="champ calcul" [value]="inputsValues.vat20" readonly="" aria-label="Opérations imposables au taux normal 20% en France métropolitaine : taxe due">
+            <button class="p-0 ms-3 infobulle btn" ngbTooltip="TVA calculée automatiquement à partir de la base HT entrée"  placement="right">
+                <i class="bi bi-info-square"></i>
+            </button>
+        </div>
+    </td>
+    </tr>
+
+    <tr class="titre-rubrique last">
+        <th class="align-gauche" colspan="4">
+        <div>Opérations réalisées dans les DOM</div>
+        </th>
+        </tr>
+        <tr id="R25" class="ligne">
+        <td class="cell-numero">
+        <div class="libelle">
+        <span>10</span>
+        </div>
+        </td><td class="cell-texte align-gauche" colspan="1">
+        <div class="libelle">
+        <span>Taux normal 8,5 %</span>
+        </div>
+
+        </td>
+        <td class="cell-data N15 align-gauche">
+            <div class="d-flex">
+            <input type="text" id="10" data-format="9(15)" class="champ" maxlength="15" [value]="inputsValues[10]" aria-label="Opérations réalisées dans les DOM imposables au taux normal : base HT">
+            <button class="p-0 ms-3 infobulle btn" ngbTooltip="Somme HT des ventes à des assujetis en Guadeloupe et Martinique"  placement="right">
+                <i class="bi bi-info-square"></i>
+            </button>
+            </div>
+        </td>
+        
+        <td class="cell-data N15 align-gauche">            
+        <input type="text" data-format="9(15)" class="champ calcul" readonly="" [value]="inputsValues.vat8_5" aria-label="Opérations réalisées dans les DOM imposables au taux normal : taxe due"></td>
+        </tr>
+        
+        <tr class="titre-rubrique last">
+            <th class="align-gauche" colspan="4">
+            <div>Opérations imposables à un taux particulier</div>
+            </th>
+        </tr>
+                    <tr id="R30" class="ligne">
+                        <td class="cell-numero">
+                        <div class="libelle">
+                        <span>15</span>
+                        </div>
+                        </td>
+                        <td class="cell-texte align-gauche" colspan="2">
+                        <div class="libelle">
+                        <span>TVA antérieurement déduite à reverser</span>
+                        <button class="p-0 ms-3 infobulle btn" ngbTooltip="Montant du surplus de TVA déductible déclaré lors des périodes précédentes. Permet de régulariser un surplus de TVA déductible"  placement="right">
+                            <i class="bi bi-info-square"></i>
+                        </button>
+                        </div>
+                        </td><td class="cell-data N15 align-gauche">
+                        <input #I15 [(ngModel)]="inputsValues[15]" type="number" data-format="9(15)" class="champ" maxlength="15" aria-label="TVA antérieurement déduite à reverser, taxe due" placeholder="Remplissage manuel !!!"></td>
+                        </tr>
+                        
+                        <tr id="R31" class="ligne">
+                        <td class="cell-numero">
+                        <div class="libelle">
+                        <span>16</span>
+                        </div>
+                        </td><td class="cell-texte align-gauche" colspan="2">
+                        <div class="libelle">
+                        <span><b>Total de la TVA brute due</b> <i>(lignes 08 à 5B)</i></span>
+                        </div>
+                        </td><td class="cell-data N15 align-gauche">
+                        <input [(ngModel)]="inputsValues[16]" type="text" id="16" data-format="9(15)" class="champ calcul" readonly="" aria-label="Total général de la TVA brute due sur opérations imposables et régularisations"></td>
+                        </tr>
+                        <tr id="R32" class="ligne">
+                        <td class="cell-numero">
+                        <div class="libelle">
+                        <span>17</span>
+                        </div>
+                        </td><td class="cell-texte align-gauche" colspan="1">
+                        <div class="libelle">
+                        <span><b>Dont TVA sur acquisitions intracommunautaires</b></span>
+                        <button class="p-0 ms-3 infobulle btn" ngbTooltip="Montant de TVA associé à la base HT entrée à la ligne B2"  placement="right">
+                            <i class="bi bi-info-square"></i>
+                        </button>
+                        </div>
+                        </td><td class="cell-data N15 align-gauche">
+                        <input [value]="inputsValues[17]" type="text" id="18" data-format="9(15)" class="champ" maxlength="15" value="" aria-label="TVA brute sur acquisitions intra-communautaires"></td><td class="cell-texte align-gauche cell-vide"></td>
+                        </tr>                       
+    </tbody>
+    </table>
+
+    <table class="n2 table  mt-5" role="presentation">
+        <tbody>
+        <tr class="titre-rubrique last">
+        <th class="align-gauche" colspan="4">
+        <div>TVA DÉDUCTIBLE</div>
+        </th>
+        </tr>
+        <tr id="R35" class="ligne">
+        <td class="cell-numero">
+        <div class="libelle">
+        <span>19</span>
+        </div>
+        </td><td class="cell-texte align-gauche" colspan="2">
+        <div class="libelle">
+        <span>Biens constituant des immobilisations</span>
+        <button class="p-0 ms-3 infobulle btn" ngbTooltip="Montant de TVA associé à des achats immobilisés"  placement="right">
+            <i class="bi bi-info-square"></i>
+        </button>
+        </div>
+        </td><td class="cell-data N15 align-gauche">
+        <input type="text" id="19" data-format="9(15)" class="champ" maxlength="15" [value]="inputsValues[19]" aria-label="TVA déductible sur biens constituant des immobilisations"></td>
+        </tr>
+        <tr id="R36" class="ligne">
+        <td class="cell-numero">
+        <div class="libelle">
+        <span>20</span>
+        </div>
+        </td><td class="cell-texte align-gauche" colspan="2">
+        <div class="libelle">
+        <span>Autres biens et services</span>
+        <button class="p-0 ms-3 infobulle btn" ngbTooltip="Montant de TVA déductible sur les achats de biens et services en France, en UE et hors UE"  placement="right">
+            <i class="bi bi-info-square"></i>
+        </button>
+        </div>
+        </td><td class="cell-data N15 align-gauche">
+        <input [value]="inputsValues[20]" type="text" id="20" data-format="9(15)" class="champ" maxlength="15"  aria-label="TVA déductible sur autres biens et services (déduction sur facture)"></td>
+        </tr>
+        <tr id="R38" class="ligne">
+        <td class="cell-numero">
+        <div class="libelle">
+        <span>21</span>
+        </div>
+        </td><td class="cell-texte align-gauche" colspan="2">
+        <div class="libelle">
+        <span>Autre TVA à déduire</span>
+        <button class="p-0 ms-3 infobulle btn" ngbTooltip="Montant de TVA collectée déclaré en trop sur des périodes antérieures"  placement="right">
+            <i class="bi bi-info-square"></i>
+        </button>
+        </div>
+        </td><td class="cell-data N15 align-gauche">
+        <input [(ngModel)]="inputsValues[21]" placeholder="Remplissage manuel !!!" type="number" id="21" data-format="9(15)" class="champ" maxlength="15" aria-label="Autre TVA à déduire, omissions ou compléments de déductions" #21>
+        </td>    
+        <tr id="R39" class="ligne">
+        <td class="cell-numero">
+        <div class="libelle">
+        <span>22</span>
+        </div>
+        </td><td class="cell-texte align-gauche" colspan="2">
+        <div class="libelle">
+        <span>Report du crédit apparaissant ligne 27 de la précédente déclaration</span>
+        </div>
+        </td><td class="cell-data N15 align-gauche">
+        <input type="number" id="22" data-format="9(15)" class="champ" maxlength="15" placeholder="Remplissage manuel !!!" [(ngModel)]="inputsValues[22]" aria-label="Report du crédit apparaissant sur la précédente déclaration" #22></td>
+        </tr>
+        <tr id="R76" class="ligne">
+        <td class="cell-numero">
+        <div class="libelle">
+        <span>2C</span>
+        </div>
+        </td><td class="cell-texte align-gauche" colspan="2">
+        <div class="libelle">
+        <span>Sommes à imputer, y compris acompte congés</span>
+        <button class="p-0 ms-3 infobulle btn" ngbTooltip="D'un exercice comptable à l'autre il y a des régularisations bilan à faire. Au moment du bilan, il faut regarder les totaux de TVA collectés qui ont été déclarés et les comparer avec ce que l'on a. S'il y a des excédents, il faut les imputer ici."  placement="right">
+            <i class="bi bi-info-square"></i>
+        </button>
+        </div>
+        </td><td class="cell-data N15 align-gauche">
+        <input [(ngModel)]="inputsValues['2C']" placeholder="Remplissage manuel !!!" type="number" data-format="9(15)" class="champ" 
+            maxlength="15" aria-label="Sommes à imputer, y compris acompte congés (exprimées en euro)" #2C>
+        </td>
+        </tr>
+
+        <tr id="R41" class="ligne">
+        <td class="cell-numero">
+        <div class="libelle">
+        <span>23</span>
+        </div>
+        </td><td class="cell-texte align-gauche" colspan="2">
+        <div class="libelle">
+        <span><b>Total TVA déductible</b> (<i>lignes 19 à 2C</i>)</span>
+        </div>
+        </td><td class="cell-data N15 align-gauche">
+        <input type="text" id="23" data-format="9(15)" class="champ calcul" readonly="" [(ngModel)]="inputsValues[23]" aria-label="Total de la TVA déductible"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class=" table  n1 mt-5" role="presentation">
+        <tbody>
+        <tr class="titre-rubrique last">
+        <th class="align-gauche" colspan="4">
+        <div>Crédit</div>
+        </th>
+        </tr>
+        <tr id="R44" class="ligne">
+        <td class="cell-indent"></td><td class="cell-numero">
+        <div class="libelle">
+        <span>25</span>
+        </div>
+        </td><td class="cell-texte align-gauche" colspan="1">
+        <div class="libelle">
+        <span>Crédit de TVA <i>(ligne 23 - ligne 16)</i></span>
+        </div>
+        </td><td class="cell-data N15 align-gauche">
+        <input type="number" id="25" data-format="9(15)" class="champ calcul" readonly="" [(ngModel)]="inputsValues[25]" min="0" aria-label="Crédit de TVA"></td>
+        </tr>
+
+        <tr class="titre-rubrique last">
+            <th class="align-gauche" colspan="4">
+            <div>Taxe à payer</div>
+            </th>
+            </tr>
+            <tr id="R45" class="ligne">
+            <td class="cell-indent"></td><td class="cell-numero">
+            <div class="libelle">
+            <span>TD</span>
+            </div>
+            </td><td class="cell-texte align-gauche" colspan="1">
+            <div class="libelle">
+            <span>TVA due <i>(ligne 16 - ligne 23)</i></span>
+            </div>
+            </td><td class="cell-data N15 align-gauche">
+            <input type="number" min="0" id="TD" data-format="9(15)" class="champ calcul" readonly="" [(ngModel)]="inputsValues.TD" aria-label="TVA nette due"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class=" n1 mt-5" role="presentation">
+        <tbody>
+            <tr class="titre-rubrique last">
+                <th class="align-gauche" colspan="4">
+                    <div>Détermination du montant à payer et/ou des crédits de TVA et/ou de TIC</div>
+                </th>
+            </tr>
+            <tr id="R46" class="ligne">
+                <td class="cell-indent"></td>
+                <td class="cell-numero">
+                    <div class="libelle">
+                        <span>26</span>
+                    </div>
+                </td>
+                <td class="cell-texte align-gauche" colspan="1">
+                    <div class="libelle">
+                        <span>Remboursement de crédit demandé sur formulaire N° 3519</span>
+                    </div>
+                </td>
+                <td class="cell-data N15 align-gauche">
+                    <input class="champ" [(ngModel)]="inputsValues[26]" type="number" maxlength="15" placeholder="Remplissage manuel !!!" aria-label="Montant du remboursement demandé" #26>
+                </td>
+            </tr>
+            <tr class="ligne">
+                <td class="cell-indent"></td><td class="cell-numero">
+                    <div class="libelle">
+                        <span>27</span>
+                    </div>
+                </td>
+                <td class="cell-texte align-gauche" colspan="1">
+                    <div class="libelle">
+                        <span><b>Crédit à reporter</b> <i>(ligne 25 - ligne 26 - ligne AA)</i> <br> (Cette somme est à reporter ligne 22 de la prochaine déclaration)</span>
+                    </div>
+                </td>
+                <td class="cell-data N15 align-gauche">
+                    <input class="champ calcul" type="number" readonly="" [(ngModel)]="inputsValues[27]" aria-label="Crédit à reporter sur déclaration suivante">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

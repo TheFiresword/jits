@@ -1,0 +1,14 @@
+.side-image{
+    width: 100%;
+    height: inherit;
+    background-image: url('./../../../../assets/je-5.jpg');
+    background-size: cover;
+}
+
+.btn:disabled, .btn.disabled, .btn:disabled .btn{
+    color: #fff!important;
+    pointer-events: none;
+    background-color: var(--secondary-color)!important;
+    border-color: var(--bs-btn-disabled-border-color);
+    opacity: var(--bs-btn-disabled-opacity);
+}

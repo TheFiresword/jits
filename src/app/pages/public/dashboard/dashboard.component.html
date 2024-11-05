@@ -1,0 +1,71 @@
+<div class="page d-flex flex-column ps-4 pe-4" id="page">
+    <div class="row d-flex align-items-center label">
+        <h4>Dashboard</h4>
+    </div>
+    
+    <div class="d-md-flex">
+        <!--Cards statistiques-->
+        <div class="col-12 col-md-5 pe-2">
+            <div class="row row-cols-1 row-cols-sm-2 g-4">
+                <div class="col">
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <div class="card-title text-muted">Clients</div>
+                            <h4 class="my-3 fw-bold">{{clientsNumber | number : '.0-0'}}</h4>
+                            <div [innerHTML]="clientsMonthlyEvolution | evolution">
+                            </div>
+                            <p class="text-muted">Depuis le mois dernier</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col">
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <div class="card-title text-muted">Chiffre d'Affaires</div>
+                            <h4 class="my-3 fw-bold">{{salesRevenue | currency : 'EUR'}}</h4>
+                            <div [innerHTML]="salesMonthlyEvolution | evolution">
+                            </div>
+                            <p class="text-muted">Depuis le mois dernier</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col">
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <div class="card-title text-muted">JEH</div>
+                            <h4 class="my-3 fw-bold">{{JEH | number : '.0-0'}}</h4>
+                            <div [innerHTML]="JEHMonthlyEvolution | evolution">
+                            </div>
+                            <p class="text-muted">Depuis le mois dernier</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col">
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <div class="card-title text-muted">Intervenants</div>
+                            <h4 class="my-3 fw-bold">{{employeesNumber | number : '.0-0'}}</h4>
+                            <div [innerHTML]="employeesMonthlyEvolution | evolution">
+                            </div>
+                            <p class="text-muted">Depuis le mois dernier</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Visualisation de données-->
+        <div class="mt-4 mt-md-0 col-12 col-md-7 plotly">
+            <app-monthly-sales-plot></app-monthly-sales-plot>
+        </div>
+        
+    </div>
+    
+    <!--Agenda-->
+    <div class="mt-4 pt-2" style="background-color: #fff;">
+        <app-calendar></app-calendar>
+    </div>    
+</div>

@@ -1,0 +1,132 @@
+
+<div class="navbar-custom ml-lg-sidebar-width" role="navigation">
+  <div class="topbar container-fluid">
+    <!--Left side-->
+    <div class="d-flex align-items-center gap-1 gap-lg-2">
+      <!--Junior Company logo-->
+      <div class="topbar-logo px-0">
+        <a routerLink="/dashboard" class="d-block .button-no-border-on-click">
+          <span class="logo-sm">
+            <img alt="logo" src="./../../../assets/small-logo.png">
+          </span>
+        </a>
+      </div>
+      <!-- Sidebar toggle button-->
+      <button class="d-none d-md-block button-toggle-menu button-no-border-on-click" data-bs-toggle="collapse" data-bs-target="#lg-sidebar"
+      aria-controls="lg-sidebar">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <button class="d-block d-md-none button-toggle-menu button-no-border-on-click" data-bs-toggle="offcanvas" data-bs-target="#off-sidebar"
+      aria-controls="off-sidebar">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <!--Search section-->
+      <form class="topbar-search-form dropdown">
+        <div class="d-flex justify-content-center align-items-center search-top ">
+          
+          <div class="search-input dropdown-toggle d-flex justify-content-center align-items-center arrow-none" data-bs-toggle="dropdown">
+            <span class="d-flex align-items-center uniform-height">
+              <i class="px-2 bi bi-search"></i>
+            </span>
+            <input class="col form-control border-none cancel-bs-styles uniform-height" type="search" placeholder="Search..."
+            id="top-search" aria-label="Search" >
+          </div>          
+          
+          <div class="pt-0 dropdown-menu dropdown-menu-start" aria-labelledby="Search dropdown">
+            <div class="card" style="border-radius: 0; border: 0">
+              <div class="card-body">
+                <h5 class="card-title fw-light">
+                  <span class="text-danger">10 </span>résultats trouvés
+                </h5>
+                <ul class="card-text ps-1">
+                  <li><button class="btn w-100 text-start fw-light" href="#"> Résultat 1</button></li>
+                  <li><button class="btn w-100 text-start fw-light" href="#"> Résultat 1</button></li>
+                  <li><button class="btn w-100 text-start fw-light" href="#"> Résultat 1</button></li>
+                </ul>
+              </div>
+            </div>            
+          </div>
+
+          <button class="uniform-height col-3 btn my-bg-secondary cancel-bs-styles" style="border-radius: 0%;" type="submit">Search</button>
+        </div>        
+      </form>
+    </div>
+    <!--Right side-->
+    <ul class="d-flex align-items-center gap-3 topbar-nav mb-0">
+      <li class="d-lg-none dropdown">
+        <button class="p-0 btn cancel-bs-styles dropdown-toggle arrow-none" id="sm-search-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-search"></i>
+        </button>
+        <div class="dropdown-menu px-2" aria-labelledby="mini-search dropdown">
+          <input class="cancel-bs-styles form-control" placeholder="Search">            
+        </div>
+      </li>
+          
+      <li class="dropdown">
+        <button class="p-0 btn cancel-bs-styles dropdown-toggle arrow-none" id="notifs-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-bell position-relative">
+            <span class="noti-icon-badge">
+            </span>
+          </i>          
+        </button>
+        <ul class="fs-small dropdown-menu dropdown-menu-end p-0" aria-labelledby="notifs-dropdown" data-popper-placement="bottom-end">
+          <h5 class="dropdown-header">Notifications</h5>
+          <li>
+            <a class="dropdown-item" *ngFor="let notif of notifications">{{notif}}</a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="d-none d-sm-block ">
+        <button class="p-0 btn cancel-bs-styles" routerLink="/guide" ngbTooltip="Manuel d'utilisation"  placement="left">
+          <i class="bi bi-info-square"></i>
+        </button>
+      </li>
+
+      <li class="d-none d-sm-block">
+        <button class="p-0 btn cancel-bs-styles" routerLink="" ngbTooltip="Support technique" placement="left">
+          <i class="bi bi-patch-question"></i>
+        </button>        
+      </li>
+
+      <li class="dropdown">
+        <button class="p-0 btn cancel-bs-styles 
+        dropdown-toggle arrow-none profile-btn position-relative"
+        id="profile-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <!--Profile-->
+          <div class="px-2 gap-2 d-flex align-items-center justify-content-center profil-card">
+              <div class="">
+                <img [src]="user.avatar || 'https://api.dicebear.com/6.x/adventurer-neutral/svg?randomizeIds=false'" alt="Avatar"
+                class="avatar rounded-circle" width="32">
+              </div>
+              <div class="d-none d-lg-block">
+                <div class="text-start">
+                  <h5 class="profile-name my-0">{{user.name | uppercase}} {{user.firstname}}</h5>
+                  <h6 class="profile-position my-0">{{user.position}}</h6>
+                </div>
+              </div>
+          </div>
+        </button>
+        <div class="fs-small dropdown-menu p-0 profile-dropdown" aria-labelledby="profile-dropdown">
+          <h6 class="dropdown-header m-0 text-overflow">Bienvenu(e)</h6>
+          <div class="dropdown-item px-0 pointer-cursor" >
+            <a class="dropdown-item-plugin d-inline-block" routerLink="/profile">
+              <i class="bi bi-person-circle me-2"></i>
+              <span>Mon profil</span>
+            </a>
+          </div>
+          <div class="dropdown-item px-0 pointer-cursor">
+            <a class="dropdown-item-plugin d-inline-block" (click)="onLogOutClick()">
+              <i class="bi bi-box-arrow-right me-2"></i>
+              <span>Déconnexion</span>
+            </a>
+          </div>
+    
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</div>

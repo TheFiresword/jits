@@ -1,0 +1,202 @@
+<div class="mt-4 pt-2" style="background-color: #fff;">
+    <div class="mt-2 d-flex justify-content-between ms-4 align-items-center">
+        
+        <button id="buttonAddEvent" data-bs-toggle="modal" data-bs-target="#eventModal" class="btn btn-outline-sc" style="font-size: 16px;" (click)="setModalForNew()">
+            <i class="bi bi-plus-circle me-2"></i>Nouvel évènement
+        </button>
+
+        <div class="me-4 col-4 text-end">
+            <span class="fw-bold">NB:</span> Clique sur un évènement pour voir ses détails ou le modifier ou encore le supprimer
+        </div>
+
+        <!--Modal de création d'évènement-->
+        <div id="eventModal" class="modal fade" tabindex="-1" data-bs-backdrop="static" #eventModal>
+            <div class="modal-dialog modal-dialog-scrollable" style="max-height:500px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{getModalTitle()}}</h4>
+                        <button type="button"  class="btn-close text-reset cancel-bs-styles" data-bs-dismiss="modal" id="modal-close-btn"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="isModalForNew ? newEventForm : updateEventForm" (ngSubmit)="isModalForNew ? newEventForm.valid && onNewEventSubmit() : updateEventForm.valid && onUpdateEventSubmit() " novalidate class="needs-validation form">
+                            <div class="form-group mb-3">
+                                <label class="form-label fw-bold" for="title">Titre
+                                  <span *ngIf="isModalForNew && monitorMandatoryInputs('title')">*</span>
+                                </label>
+                                <input id="modalFormTitle" placeholder="" name="title" type="text" class="form-control"  formControlName="title" [required]="isModalForNew">                                     
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="form-label fw-bold" for="description">Description
+                                  <span *ngIf="isModalForNew && monitorMandatoryInputs('description')">*</span>
+                                </label>
+                                <textarea id="description" placeholder="" name="description" type="text" class="form-control"  formControlName="description"></textarea>                                   
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <div class="form-group">
+                                    <label class="form-label fw-bold" for="eventCategory">Catégorie
+                                      <span *ngIf="isModalForNew && monitorMandatoryInputs('eventCategory')">*</span>
+                                    </label>
+                                    <select class="form-select" aria-label="Category select" formControlName="eventCategory" name="eventCategory" [required]="isModalForNew">
+                                        <option *ngFor="let event of poleEvents" [value]="event.name" 
+                                        [ngStyle]="{'background-color': 'transparent', 'border-color': event.color, 'color':event.color}">
+                                            {{event.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+    
+                            <div class="row mb-3">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label class="form-label fw-bold" for="start">Début
+                                    <span *ngIf="isModalForNew && monitorMandatoryInputs('start')">*</span>
+                                  </label>
+                                  <input id="modalFormStart" name="start" type="date" class="form-control"  formControlName="start" [required]="isModalForNew" [min]="todayDate">                              
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                    <label class="form-label fw-bold" for="end">Fin
+                                      <span *ngIf="isModalForNew && monitorMandatoryInputs('end')">*</span>
+                                    </label>
+                                    <input id="modalFormEnd" name="end" type="date" class="form-control"  formControlName="end" [required]="isModalForNew" [min]="todayDate" >                              
+                                  </div>
+                              </div>
+                            </div>
+                            
+                            <div class="form-check form-switch mt-4 mb-3">
+                                <input class="form-check-input" type="checkbox" id="reccurent" formControlName="reccurent">
+                                <label class="form-check-label fw-bold me-2" for="reccurent">Récurrent</label>
+                                <i ngbTooltip="Cet évènement sera t'il récurrent?" animation="true" placement="right" 
+                                class="bi bi-question-octagon align-middle" style="font-size: 12px;"></i> 
+                            </div>
+
+                            <div formGroupName="rrule" *ngIf="isEventReccurent">                                                 
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-label fw-bold" for="freq">Fréquence*</label>
+                                            <select class="form-select" aria-label="Frequence select" formControlName="freq" name="freq" id="freq">
+                                                <option value="daily">Quotidien</option>
+                                                <option value="weekly">Hebdomadaire</option>
+                                                <option value="monthly">Mensuelle</option>
+                                                <option value="yearly">Annuelle</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="label-with-toolTip form-label">
+                                                <label class="fw-bold d-inline align-middle me-2" for="interval">Intervalle</label>
+                                                    <i [ngbTooltip]="toolTipContent" animation="true" placement="left" 
+                                                    class="bi bi-question-octagon align-middle" style="font-size: 12px;"></i>                  
+                                            </div>                                                                                                                                                  
+
+                                            <ng-template #toolTipContent>
+                                                <p style="text-align: justify;">L'intervalle entre chaque réccurence de l'évènement.
+                                                    <br>Par exemple, pour un évènement hebdomadaire, un intervalle de 2 signifie <strong>1 fois toutes les 2 semaines</strong>.
+                                                </p>
+                                            </ng-template>
+
+                                            <input type="number" class="form-control custom-input" formControlName="interval" name="interval" id="interval">
+                                        </div>
+                                    </div>
+                                                                        
+                                </div>
+
+                                <!--Jours de la semaine de la récurrence de l'évènement-->
+                                <div class="row mb-4" formGroupName="byweekday">
+                                    <label class="form-label fw-bold" for="byweekday">Jours de récurrence</label>
+                                    <div class="col">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="Monday" value="0" formControlName="0">
+                                            <label class="form-check-label" for="Monday">Lundi</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="Tuesday" value="1" formControlName="1">
+                                            <label class="form-check-label" for="Tuesday">Mardi</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="Wednesday" value="2" formControlName="2">
+                                            <label class="form-check-label" for="Wednesday">Mercredi</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="Thursday" value="3" formControlName="3">
+                                            <label class="form-check-label" for="Thursday">Jeudi</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="Friday" value="4" formControlName="4">
+                                            <label class="form-check-label" for="Friday">Vendredi</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox"  id="Saturday" value="5" formControlName="5">
+                                            <label class="form-check-label" for="Saturday">Samedi</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox"  id="Sunday" value="6" formControlName="6">
+                                            <label class="form-check-label" for="Sunday">Dimanche</label>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-label fw-bold" for="dtstart">Début récurrence*
+                                        
+                                        </label>
+                                        <input id="dtstart" name="dtstart" type="date" class="form-control"  formControlName="dtstart" [min]="todayDate">                              
+                                    </div>
+                                    </div>
+                                    <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-label fw-bold" for="end">Fin récurrence*                                          
+                                        </label>
+                                        <input id="until" name="until" type="date" class="form-control"  formControlName="until"  [min]="todayDate" >                              
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <div *ngIf="isModalForNew" class="mt-4 text-center rounded m-auto" style="height:2em; width:fit-content">
+                                <div *ngIf="!newEventForm.valid" class="text-danger fw-bold text-center">Le champ {{findFirstInvalidField()}} n'est pas valide!</div>
+                            </div>
+    
+                            <div class="form-group text-center mt-4 d-flex justify-content-between">
+                                <div class="d-flex gap-2 col-8">
+                                    <button *ngIf="!isModalForNew" class="btn bg-danger text-white cancel-bs-styles" data-bs-eventId="" data-bs-dismiss="modal" (click)="onDeleteEvent()">Supprimer</button>
+                                    <button class="btn bg-danger text-white cancel-bs-styles" data-bs-dismiss="modal">Annuler</button>
+                                </div>                            
+                                <button class="btn bg-success text-white cancel-bs-styles" [disabled]="isModalForNew? !newEventForm.valid: !updateEventForm.valid" type="submit">Valider</button>                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>                    
+        </div>
+        
+        <!--
+        <p class="mb-3">Drag un évènement parmi ceux ci-dessous!</p>
+        <div id="draggableContainer" class="draggableContainer">
+            <button class="mb-2 draggable-item btn d-block" *ngFor="let event of poleEvents"
+            [ngStyle]="{'background-color': 'transparent', 'border-color': event.color, 'color':event.color}">
+                {{event.name}}
+            </button>
+        </div>
+        -->
+        
+    </div>
+
+    <div id="calendar" class="calendar col mt-3" style="max-height: 592px;" #calendar></div>
+</div>

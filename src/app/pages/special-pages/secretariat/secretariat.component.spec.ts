@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { SecretariatComponent } from './secretariat.component';
+
+describe('SecretariatComponent', () => {
+  let component: SecretariatComponent;
+  let fixture: ComponentFixture<SecretariatComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ SecretariatComponent ]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(SecretariatComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

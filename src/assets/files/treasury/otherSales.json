@@ -1,0 +1,19 @@
+[{
+    "id": "",
+    "budgetPart": "Intérêt sur livret/compte épargne",
+    "label": "Intérêts banque",
+    "localization": "Metropole",
+    "emitDate": "2023-05-05",
+    "dueDate": "2023-06-05",
+    "exludingTaxes": 0.32,
+    "vatToCollect": 0,
+    "allTaxesIncluded": 0.32,
+    "paymentDate": "2023-07-05",
+    "daysLate": 0,
+    "tvaDeclarationPeriod": "Juillet",
+    "accountingSale": false,
+    "accountingBank": false,
+    "comments": "",
+    "relaunchStep": null
+  }
+]

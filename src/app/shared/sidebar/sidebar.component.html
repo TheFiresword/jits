@@ -1,0 +1,229 @@
+<div class="sidebar h-100" id="sidebar">
+    <!--Collapse block for md+ screens-->
+    <div class="collapse show px-4 lg-sidebar" id="lg-sidebar">
+        <div class="sidebar-header mb-4">
+            <a class="sidebar-header-logo d-flex" routerLink="">
+                <img src="./../../../assets/logo.png" alt="logo">            
+            </a>
+        </div>
+        
+        <div class="sidebar-body">
+            <ul class="sidebar-nav-menu ps-0">
+                <li class="title" >
+                    <h6 class="text-uppercase">Informations générales</h6>
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/dashboard" routerLinkActive="item-active" role="button" >
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Tableau de bord</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/general" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-file-earmark-text-fill"></i>
+                        <span>Présentation</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/positions" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-person-circle"></i>
+                        <span>Postes</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/performances" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-clipboard-data"></i>
+                        <span>Performances</span>
+                    </div>                    
+                </li>
+                
+
+                <li class="title" >
+                    <h6 class="text-uppercase">Gestion interne</h6>
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/documents" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-files"></i>
+                        <span>Documents</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/meetings" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-calendar-event"></i>
+                        <span>Réunions</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/students" routerLinkActive="item-active" role="button">
+                        <i class= "bi bi-people"></i>
+                        <span>Elèves</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/processes" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-gear-fill"></i>
+                        <span>Process</span>
+                    </div>                    
+                </li>
+            
+
+                <li class="title" >
+                    <h6 class="text-uppercase">Gestion activités</h6>
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/projects" routerLinkActive="item-active" role="button">
+                        <i class= "bi bi-briefcase"></i>
+                        <span>Projets</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/clients-tracking" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-telephone"></i>
+                        <span>Suivi clients</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/enterprises" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-building"></i>
+                        <span>Entreprises</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/contacts" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-person-lines-fill"></i>
+                        <span>Contacts</span>
+                    </div>                    
+                </li>
+                
+
+                <li class="title" >
+                    <h6 class="text-uppercase">Menus spéciaux</h6>
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/treasury" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-piggy-bank"></i>
+                        <span>Trésorerie</span>
+                    </div>                    
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    <!--Offcanvas block for md- screens-->
+    <div class="d-block d-md-none offcanvas offcanvas-start px-2" id="off-sidebar">
+        <div class="offcanvas-header mb-4">
+            <a class="offcanvas-header-logo d-flex" routerLink="">
+                <img src="assets/logo.png" alt="logo">            
+            </a>
+            <button type="button" class="button-no-border-on-click text-reset bg-transparent border-0" 
+                data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="bi bi-x-square"></i>
+            </button>
+            
+        </div>
+        
+        <div class="sidebar-body">
+            <ul class="sidebar-nav-menu ps-0">
+                <li class="title" >
+                    <h6 class="text-uppercase">Informations générales</h6>
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/dashboard" routerLinkActive="item-active" role="button" >
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Tableau de bord</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/general" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-file-earmark-text-fill"></i>
+                        <span>Présentation</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/positions" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-person-circle"></i>
+                        <span>Postes</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/performances" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-clipboard-data"></i>
+                        <span>Performances</span>
+                    </div>                    
+                </li>
+                
+
+                <li class="title" >
+                    <h6 class="text-uppercase">Gestion interne</h6>
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/documents" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-files"></i>
+                        <span>Documents</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/meetings" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-calendar-event"></i>
+                        <span>Réunions</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/students" routerLinkActive="item-active" role="button">
+                        <i class= "bi bi-people"></i>
+                        <span>Elèves</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/processes" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-gear-fill"></i>
+                        <span>Process</span>
+                    </div>                    
+                </li>
+            
+
+                <li class="title" >
+                    <h6 class="text-uppercase">Gestion activités</h6>
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/projects" routerLinkActive="item-active" role="button">
+                        <i class= "bi bi-briefcase"></i>
+                        <span>Projets</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/clients-tracking" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-telephone"></i>
+                        <span>Suivi clients</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/enterprises" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-building"></i>
+                        <span>Entreprises</span>
+                    </div>                    
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/contacts" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-person-lines-fill"></i>
+                        <span>Contacts</span>
+                    </div>                    
+                </li>
+                
+                
+                <li class="title" >
+                    <h6 class="text-uppercase">Menus spéciaux</h6>
+                </li>
+                <li class="item">
+                    <div class="d-flex gap-3" routerLink="/treasury" routerLinkActive="item-active" role="button">
+                        <i class="bi bi-piggy-bank"></i>
+                        <span>Trésorerie</span>
+                    </div>                    
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>

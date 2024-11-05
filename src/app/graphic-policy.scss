@@ -1,0 +1,272 @@
+//-------------------------Angular Material Components--------------------------
+
+@use "@material/theme" with (
+  $primary: #fcb8ab,
+  $secondary: #feeae6,
+  $on-primary: #442b2d,
+  $on-secondary: #442b2d,
+);
+@use "@material/button/mdc-button";
+
+
+/*-------------------------Non Angular Elements--------------------------*/
+
+//------Theme color--------|
+$primary-color: #475a73;
+$secondary-color:  #fa5c7c;
+:root{
+    --primary-color: #475a73;
+    --primary-color-rgb: 71, 90, 115;
+    --primary-accent-color-rgb: 49, 64, 82;
+    --secondary-color:  #fa5c7c;
+    --secondary-color-rgb: 250, 92, 124;
+    --secondary-accent-color-rgb: 235, 25, 67;
+}
+
+.my-bg-primary{
+    background-color: $primary-color;
+    color: #fff;
+}
+.my-bg-primary:hover,.my-bg-primary:active{
+    color: inherit;
+}
+
+.my-bg-secondary{
+    background-color: $secondary-color;
+    color: #fff;
+}
+.my-bg-secondary:hover,.my-bg-secondary:active{
+    color: inherit;
+}
+
+.btn-outline-sc{
+    color: var(--secondary-color) !important;
+    background-color: transparent !important;
+    border-color: var(--secondary-color) !important;
+}
+.btn-outline-sc:focus{
+    color: white !important;
+    background-color: var(--secondary-color) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+.btn-outline-sc:hover{
+    color: white !important;
+    background-color: var(--secondary-color)!important;
+    border-color: transparent!important;
+}
+.btn{
+    border-radius: 3px; 
+}
+
+
+
+$gradient-start-color: $primary-color;
+$gradient-end-color: $secondary-color;
+:root{
+    --gradient-start-color: #{$primary-color};
+    --gradient-end-color: #{$secondary-color};
+}
+
+
+.gradient-color {
+    background: linear-gradient(87deg, $gradient-start-color, $gradient-end-color);
+}
+
+.bg-transparent {
+    background: transparent;
+}
+
+.green-snackbar {
+    background: rgb(65, 252, 134)!important;
+    color: white;
+    max-width: 400px;
+    width: auto;
+    margin: auto;
+  }
+  
+  .green-snackbar button {
+    background-color: rgb(65, 252, 134);
+    color: white !important;
+    border: none;
+  }
+
+  .red-snackbar {
+    background: #F44336;
+    color: white;
+    max-width: 400px;
+    width: auto;
+    margin: auto;
+
+  }
+  
+  .red-snackbar button {
+    background-color: #F44336;
+    color: white !important;
+    border: none;
+  }
+
+
+  a {
+    text-decoration: none !important;
+}
+ul, ol, dl{
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important;
+    list-style-type: none !important;
+}
+ol, ul{
+    padding-left: 2rem !important;
+}
+
+.h5, h5 {
+    font-size: .936rem !important;
+}
+
+.h6, h6 {
+    font-size: .765rem !important;
+}
+
+img {
+    vertical-align: middle !important;
+}
+
+.fs-small{
+    font-size: small !important;
+}
+
+.button-no-border-on-click{
+    outline: none !important;
+}
+
+.border-none{
+    border: 0!important;
+    border-radius: 0!important;
+}
+
+.card{
+    border-radius: 5px !important;
+}
+
+.my-text-success{
+    background-color: #57cc99!important;
+    color: white !important;
+    border: none!important;
+}
+.my-text-failure{
+    background-color: #e04e5f!important;
+    color: white !important;
+    border: none !important;
+}
+
+.calendar{
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 1.5rem;
+
+    .fc-col-header-cell a{
+        color: inherit;
+    }
+    .fc-daygrid-day-top a{
+        color: inherit;
+        //background-color: rgb(86, 82, 100);
+    }
+    .fc-list-day a{
+        color: inherit;
+    }
+}
+.custom-calendar-events{
+    cursor: pointer;
+    :hover{
+        color: black;
+        background-color: transparent;
+    }
+}
+
+.cancel-bs-styles{
+    color: white;
+}
+.cancel-bs-styles:focus{
+    box-shadow: none !important;
+    border-color: transparent !important;
+}
+.cancel-bs-styles:active{
+    box-shadow: none !important;
+    border-color: transparent !important;
+    color: #fff;
+}
+.form .form-control, .form select, .form-switch input{
+    background-color: #f0f3f8;
+}
+.form .form-control, .form .form-select{
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid var(--ct-body-color);
+}
+.form .form-control:hover, .form .form-select:hover, .form .form-control:focus,.form .form-select:focus, .form .form-control:active, .form .form-select:active{
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid var(--secondary-color);
+    box-shadow: none;
+}
+.form-check-input:checked {
+    background-color: var(--secondary-color);
+    border-color: transparent;
+}
+
+.page{
+    .label{
+        height: var(--ct-topbar-height);
+        h3, h4{
+            font-size: 1.75rem!important;
+        }
+    }
+    .draggableContainer .draggable-item{
+        cursor:move;
+        width: 12rem;
+    }
+}
+.dz-success-mark{
+    color: var(--secondary-color);
+}
+.dz-error-mark{
+    color: var(--primary-color);
+}
+
+//datatables
+table{
+    >tbody>tr:nth-child(odd)>td,>tbody>tr:nth-child(odd)>th{
+        background-color: var(--ct-body-bg)!important;    
+    }
+    td, th{
+        color: var(--ct-body-color)!important;
+        vertical-align: middle;
+    }
+
+    
+}
+
+
+.active>.page-link, .page-link.active {
+    color: #fff!important;
+    background-color: var(--secondary-color)!important;
+    border: 0!important;
+}
+.page-link:hover {
+    color: #fff !important;
+    background-color: var(--secondary-color)!important;
+    border: none !important;
+}
+a:hover {
+    --bs-link-color-rgb: var(--secondary-color-rgb);
+}
+.page-link {
+    margin: 10px;
+    color: inherit !important;
+    background-color: var(--ct-body-bg)!important;
+    border: none !important;
+    border-radius: 50% !important;
+    box-shadow: none !important;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out;
+}

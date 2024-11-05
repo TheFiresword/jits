@@ -1,0 +1,68 @@
+<div class="custom-background">
+  <div class="d-none d-md-block col-6 special-shape-left">
+  </div>
+
+  <div class="col-12 col-md-6 special-shape-right d-flex justify-content-center align-items-center">
+    <div class="rectangle-inside d-flex flex-column align-items-center justify-content-center">
+      <div class="card shadow-effect">
+        <div class="card-header py-4 text-center my-bg-secondary">
+          <a routerLink="/dashboard">
+            <span>
+              <img alt="logo" height="50" src="./../../../../assets/logo.png">
+            </span>
+          </a>
+        </div>
+        <div class="card-body p-4">
+          <div class="text-center w-75 m-auto">
+            <h4 class="text-center pb-0 fw-bold text-dark-50">Connexion</h4>
+            <p class="text-muted mb-4">Entre ton mail INSA et ton mot de passe pour trouver le One Piece</p>
+          </div>
+
+          <form class="form needs-validation" #loginF="ngForm" (ngSubmit)="loginF.form.valid && onSubmit()">
+            <div class="form-group mb-3">
+              <label class="form-label fw-bold" for="email">Adresse email</label>
+              <input class="cancel-bs-styles" type="email" id="email" name="email" placeholder="prenom.nom@insa-cvl.fr"
+                     [(ngModel)]="loginForm.email" required
+                     class="form-control"
+                     #email="ngModel">
+            </div>
+            <div class="alert alert-danger p-2 animate__animated animate__fadeIn"
+                 role="alert"
+                 *ngIf="email.errors && loginF.submitted">
+              Email non valide!
+            </div>
+            <div class="form-group mb-3">
+              <div class="d-flex justify-content-between">
+                <label class="form-label fw-bold" for="password">Mot de passe</label>
+                <a (click)="retrievePassword()" routerLink="/login" class="text-muted">T'as oublié ?</a>
+              </div>
+              
+              <input type="password" id="password" name="password" minlength="4" placeholder="Saisis ton mot de passe" [(ngModel)]="loginForm.password" required
+                     class="form-control mt-1" #password="ngModel">
+            </div>
+            <div class="alert alert-danger p-2 animate__animated animate__fadeIn"
+                 role="alert"
+                 *ngIf="password.errors && loginF.submitted">
+              Mot de passe non valide!
+            </div>
+
+            <div class="form-group text-center mb-3">
+              <button class="btn my-bg-secondary cancel-bs-styles" type="submit">Connexion</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <div class="row mt-3">
+        <div class="col-12 text-center">
+          <p class="text-muted">Pas encore inscrit(e) ?
+            <a [routerLink]="['/register']" class="text-muted ms-1">
+              <b>Inscription</b>
+            </a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

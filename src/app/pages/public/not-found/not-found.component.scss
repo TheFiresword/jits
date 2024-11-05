@@ -1,0 +1,10 @@
+.shadow-effect{
+    border: none;
+    box-shadow: 0 0 5px rgba(127, 127, 127, 0.99);
+}
+.text-error{
+    color: var(--primary-color);
+    text-shadow: rgba(var(--primary-color-rgb),.3) 5px 1px,rgba(var(--primary-color-rgb),.2) 10px 3px;
+    font-size: 5.25rem;
+    line-height: 5.625rem;
+}

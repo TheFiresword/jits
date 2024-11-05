@@ -1,0 +1,231 @@
+<div class="page d-flex flex-column ps-4 pe-4">
+    <div class="row d-flex align-items-center  label justify-content-between">
+        <div class="col">   
+            <h4>Profil étudiant</h4>
+        </div>        
+    </div>
+
+    <form [formGroup]="updateDetailsForm" novalidate class="needs-validation form">
+        
+        <div class="position-relative col px-2 d-flex align-items-center justify-content-end gradient-color" style="height:150px; margin-bottom:80px; border-radius:5px">
+            <div class="position-absolute" style="left: 45px; top:40%">
+                <img [src]="avatarPath || 'https://api.dicebear.com/6.x/adventurer-neutral/svg?randomizeIds=true'" alt="Avatar"
+                class="avatar rounded-circle" height="150">
+                <button class="btn btn-outline-sc" style="position: absolute;left: 70%; bottom: 0;">Changer</button>
+            </div>
+            <div class="d-block position-absolute" style="left:200px; top: 55%">
+                <div class="text-light">
+                  <h4 class="">{{studentDetails.lastname | uppercase}} {{studentDetails.firstname}}</h4>
+                  <h5 class="">{{studentDetails.role}}</h5>
+                </div>
+            </div>  
+            <div class="col-2 d-flex justify-content-end">
+                <button class="btn btn-dark" (click)="activateChange()">Modifier<i class="ms-2 bi bi-pen"></i></button>
+            </div>          
+        </div>
+
+        
+        <div class="d-md-flex justify-content-between">
+                <div class="col me-md-4 mb-3">
+                    <div class="card" [ngClass]="{'read-only': !changeState}">
+                        <div class="card-body">                
+                            <div class="card-title mb-4">
+                                <h4 class="mt-2">Informations personnelles</h4>                
+                            </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-label fw-bold" for="firstname">Prénom
+                                            </label>
+                                            <input name="firstname" type="text" class="form-control"  formControlName="firstname">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-label fw-bold" for="lastname">Nom
+                                            </label>
+                                            <input name="lastname" type="text" class="form-control"  formControlName="lastname" >
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-label fw-bold" for="email">Email
+                                            </label>
+                                            <input name="email" type="text" class="form-control"  formControlName="email" >
+                                            <div class="alert p-2 text-danger animate__animated animate__fadeIn"
+                                                role="alert"
+                                                *ngIf="updateDetailsForm.controls.email.errors">
+                                                Email non valide!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-label fw-bold" for="phone">Téléphone
+                                            </label>
+                                            <input name="phone" type="text" class="form-control"  formControlName="phone" >
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-label fw-bold" for="role">Poste
+                                            </label>
+                                            <input *ngIf="!changeState" name="role" type="text" class="form-control"  formControlName="role" readonly>
+                                            <select *ngIf="changeState" class="form-select" aria-label="Role select" formControlName="role" name="role">
+                                                <option value="" selected>Choisir un poste</option>
+                                                <optgroup *ngFor="let pole of getAvailablePoles(); index as i" [label]="getStringifiedAvailablePoles()[i]">
+                                                  <option *ngFor="let role of getOnePoleRoles(pole)" [value]="role">
+                                                    {{role}}
+                                                  </option>
+                                                </optgroup>
+                                              </select>
+                                        </div>
+                                    </div>
+                                </div>                                
+                        </div>
+                    </div>
+                </div>                                    
+                <div class="col mb-3">
+                    <div class="card w-100" [ngClass]="{'read-only': !changeState}">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Adresse</h4>                          
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-label fw-bold" for="adress">Adresse
+                                        </label>
+                                        <input name="adress" type="text" class="form-control"  formControlName="adress" >
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-label fw-bold" for="zipCode">Code Postal
+                                            </label>
+                                            <input name="zipCode" type="text" class="form-control"  formControlName="zipCode" >
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-label fw-bold" for="city">Ville
+                                            </label>
+                                            <input name="city" type="text" class="form-control"  formControlName="city" >
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="d-md-flex justify-content-between">
+                <div class="col me-md-4 mb-3">
+                    <div class="card w-100" [ngClass]="{'read-only': !changeState}">
+                        <div class="card-body">                
+                            <h4 class="card-title mb-4">Informations scolaires</h4>                
+                            <div class="row mb-3">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-label fw-bold" for="year">Année d'étude
+                                            </label>
+                                            <input *ngIf="!changeState" name="year" type="text" class="form-control"  formControlName="year" readonly>
+                                            <select *ngIf="changeState" class="form-select" aria-label="Year select" formControlName="year" name="year">
+                                                <option value="1A">1A</option>
+                                                <option value="2A">2A</option>
+                                                <option value="3A">3A</option>
+                                                <option value="4A">4A</option>
+                                                <option value="5A">5A</option>
+                                            </select>
+                                        </div>                                        
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-label fw-bold" for="department">Département
+                                            </label>
+                                            <input *ngIf="!changeState" name="department" type="text" class="form-control"  formControlName="department" readonly>
+                                            <select *ngIf="changeState" class="form-select" aria-label="Department select" formControlName="department" name="department">                                                <option value="ERE">ERE</option>
+                                                <option value="GSI">GSI</option>
+                                                <option value="MRI">MRI</option>
+                                                <option value="Paysage">Paysage</option>
+                                                <option value="STI">STI</option>
+                                              </select>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-label fw-bold" for="campus">Campus
+                                            </label>
+                                            <input *ngIf="!changeState" name="campus" type="text" class="form-control"  formControlName="campus" readonly>
+                                            <select *ngIf="changeState" class="form-select" aria-label="Campus select" formControlName="campus" name="campus">
+                                                <option value="Blois">Blois</option>
+                                                <option value="Bourges">Bourges</option>
+                                              </select>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>           
+                </div>            
+                <div class="col">
+                    <div class="card" [ngClass]="{'read-only': !changeState}">
+                        <div class="card-body">                
+                            <h4 class="card-title mb-4">Fichiers personnels</h4>                
+                                <div class="col">
+                                    <ul>
+                                        <li *ngFor="let file of studentDetails.myfiles" class="w-100 d-flex justify-content-between">
+                                            <a [href]="file.path" target="_blank">                                                
+                                                <i  *ngIf="file.type == 'img'" class="bi bi-filetype-jpg"></i>
+                                                <i *ngIf="file.type == 'mp3'" class="bi bi-filetype-mp3"></i>
+                                                <i *ngIf="file.type == 'mp4'" class="bi bi-filetype-mp4"></i>
+                                                <i *ngIf="file.type == 'pdf'" class="bi bi-file-earmark-pdf"></i>
+                                                <i *ngIf="file.type == 'excel'" class="bi bi-file-earmark-excel"></i>
+                                                <i *ngIf="file.type == 'word'" class="bi bi-file-earmark-word"></i>
+                                                <i *ngIf="file.type == 'powerpoint'" class="bi bi-file-earmark-ppt"></i>
+                                                <i *ngIf="file.type == 'other'" class="bi bi-file-earmark"></i>
+                                                <span class="ms-2">{{file.name}}</span>
+                                            </a>
+
+                                            <button data-bs-toggle="modal" data-bs-target="#confirmationModal" class="btn p-0" style="color: var(--secondary-color);"><i class="bi bi-trash"></i></button>
+                                            
+                                            <div id="confirmationModal" class="modal fade" tabindex="-1" data-bs-backdrop="static">
+                                                <div class="modal-dialog modal-dialog-scrollable" style="max-height:500px">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Confirmation de suppression</h4>
+                                                            <button type="button"  class="btn-close text-reset cancel-bs-styles" data-bs-dismiss="modal" id="modal-close-btn"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Veux-tu vraiment supprimer ce fichier? Réfléchis à 2 fois!!!</p>
+                                                            <div class="d-flex gap-4">
+                                                                <button class="btn my-bg-primary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                                                <button class="btn btn-danger" (click)=initCancelFile(file.id)><i class="bi bi-check-lg"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    
+                                    <div id="dropFile" class="dropzone"></div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="col-6 mb-3 mt-5 d-flex align-items-center justify-content-center" *ngIf="changeState">                                    
+            <button class="btn btn-danger me-5" (click)="cancelChange()">Annuler</button>
+            <button class="btn btn-success" type="submit" (click)="updateDetailsForm.valid && onSubmitChanges()">Valider</button>
+        </div>
+    </form>
+</div>
+
+

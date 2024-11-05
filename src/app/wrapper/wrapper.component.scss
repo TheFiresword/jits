@@ -1,0 +1,24 @@
+
+.wrapper{
+    display: flex;
+    
+    app-navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    app-sidebar{
+        position: sticky;
+        top:0;
+        z-index: 200;
+        max-height: 100vh;
+    }
+
+    app-footer{
+        position: sticky;
+        bottom: 0;
+        top: 100%;
+        right: 0;
+    } 
+}

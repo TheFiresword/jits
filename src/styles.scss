@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+// Autres imports de styles
+@import './app/graphic-policy.scss';
+@import './app/graphic-config.scss';
+
+
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: var(--ct-body-font-family), Roboto, "Helvetica Neue", sans-serif !important;
+    font-size: var(--ct-body-font-size) !important;
+    font-weight: var(--ct-body-font-weight) !important;
+    color: var(--ct-body-color) !important;
+    background-color: var(--ct-body-bg) !important;
+    //overflow-x: hidden !important;
+}

@@ -1,0 +1,20 @@
+.page{
+    .card{
+        width: 100%;
+        height: 100%;
+    }
+    .row-cols-1 .col{
+        width: fit-content;
+    }
+    .read-only{
+        input{
+            border: none;
+        }
+    }
+    .dropzone {
+        border: 2px dashed #ccc;
+        padding: 20px;
+        background: #f9f9f9;
+        text-align: center;
+      }
+}

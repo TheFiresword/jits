@@ -1,0 +1,16 @@
+.footer{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    //color: #dee2e6;
+    transition: all .025s ease-in-out;
+    border-top: 1px solid #dee2e6;
+    width: 100%;
+    .right-side-buttons{
+        border-color: var(--ct-body-color);
+        color: var(--ct-body-color);
+        background-color: transparent;
+        box-shadow: -5px 5px var(--primary-color);
+    }
+}

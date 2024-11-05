@@ -1,0 +1,10 @@
+.page{
+    .read-only{
+        input{
+            border: none;
+        }
+    }
+    .seperator{
+        border-bottom: 2px solid var(--ct-body-color);
+    }
+}

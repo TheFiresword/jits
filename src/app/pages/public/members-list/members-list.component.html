@@ -1,0 +1,10 @@
+<div class="page d-flex flex-column ps-4 pe-4" id="page">
+    <div class="row d-flex align-items-center label">
+        <h4>Liste des élèves</h4>
+    </div>
+    <div class="p-3" style="background-color: white">
+        <ng-container *ngIf="students.length > 0" >
+            <app-datatable tableType="Student" tableId="studentsTable" [dataArray]="students" (userAction)="monitorAction($event)"></app-datatable>
+        </ng-container>
+    </div>    
+</div>

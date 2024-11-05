@@ -1,0 +1,148 @@
+<div class="page d-flex flex-column ps-4 pe-4">
+    <div class="row d-flex align-items-center  label justify-content-between">
+        <div class="col">   
+            <h4>Transaction commerciale</h4>
+        </div>        
+    </div>      
+    <div class="card p-4 read-only w-75 m-auto">
+            <div class="card-body">
+                <div class="mb-3 d-flex justify-content-between">
+                    <div class="col-4 btn btn-outline-sc">Modifier</div>
+                    <div class="col-4 btn btn-outline-sc">Supprimer</div>
+                </div>
+                <form [formGroup]="transactionForm" novalidate class="needs-validation form">
+                    <div class="row d-flex justify-content-between seperator pb-4">
+                        <div class="col-4">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <span class="badge" [ngClass]="{'my-text-success':isTransactionPaid(), 'my-text-failure':!isTransactionPaid()}">
+                                        {{isTransactionPaid()? 'Payée' : 'Non payée'}}
+                                    </span>
+                                </div>
+                                <div class="form-group ps-2">
+                                    <input name="type" type="text" class="form-control h4"  formControlName="type" readonly>
+                                    <select *ngIf="false" class="form-select" aria-label="Transaction type" formControlName="type">
+                                        <option value="purchase" selected>Achat</option>
+                                        <option value="sale" selected>Vente</option>
+                                        <option value="otherSale" selected>Autre recette</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mt-5">
+                                <div class="form-group">
+                                    <label class="form-label fw-bold h5" for="lastname">Facture n°
+                                    </label>
+                                    <input name="id" type="text" class="form-control"  formControlName="id" readonly value="AGP Reims">
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-4 d-flex flex-column align-items-end">
+                            <div><img src="assets/logo.png" alt="logo" height="50"></div>
+                            <div class="mt-5">
+                                <span class="badge" [ngClass]="{'my-text-success' :isTransactionAccounted(), 'my-text-failure' : !isTransactionAccounted() }">{{isTransactionAccounted() ? 'Comptabilisée' : 'Non comptabilisée'}}</span>
+                            </div>                  
+                        </div>
+                    </div>
+    
+                    <div class="mt-4 row d-flex justify-content-between seperator pb-4">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="form-label fw-bold h6" for="">De
+                                </label>
+                                <input name="partner" type="text" class="form-control"  formControlName="partner" readonly>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label class="form-label fw-bold h6" for="lastname">Localisation
+                                </label>
+                                <input name="localization" type="text" class="form-control"  formControlName="localization" readonly>
+                                <select *ngIf="false" class="form-select" aria-label="Localization select" formControlName="localization">
+                                    <option value="" selected>Choisir une localisation</option>
+                                    <option *ngFor="let loc of getLocValues()" [value]="loc">
+                                        {{loc}}
+                                      </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="form-label fw-bold h6" for="">Date de réception
+                                </label>
+                                <input id="modalFormStart" name="transactionStart" type="date" class="form-control"  formControlName="transactionStart" [min]="todayDate" readonly>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label class="form-label fw-bold h6 text-danger" for="lastname">Date de paiement
+                                </label>
+                                <input id="modalFormStart" name="transactionPaid" type="date" class="form-control"  formControlName="transactionPaid" [min]="todayDate" readonly>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="mt-4 row d-flex justify-content-between seperator pb-4">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="form-label fw-bold h6" for="">Description
+                                </label>
+                                <textarea name="description" type="text" class="form-control"  formControlName="description" readonly></textarea>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label class="form-label fw-bold h6" for="">Part du Budget
+                                </label>
+                                <input name="budgetPart" type="text" class="form-control"  formControlName="budgetPart" readonly>
+                                <select *ngIf="false" class="form-select" aria-label="budget select" formControlName="budgetPart">
+                                    <option value="" selected>Choisir une catégorie</option>
+                                    <option value="">Ventes</option>
+                                </select>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label class="form-label fw-bold h6" for="">Commentaires
+                                </label>
+                                <textarea name="comments" type="text" class="form-control"  formControlName="comments" readonly></textarea>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="form-label fw-bold h6 text-danger" for="">Montant HT
+                                </label>
+                                <div class="input-group">
+                                    <input name="ht" type="text" class="form-control"  formControlName="ht" readonly>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" style="border-radius: none; border: none">€</span>
+                                    </div>
+                                </div>                            
+                            </div>
+                            <div class="form-group mt-3">
+                                <label class="form-label fw-bold h6" for="">Taxe TVA
+                                </label>
+                                <div class="input-group">
+                                    <input name="vat" type="text" class="form-control"  formControlName="vat" readonly>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" style="border-radius: none; border: none">€</span>
+                                    </div>
+                                </div>                            
+                            </div>
+                            <div class="form-group mt-3">
+                                <label class="form-label fw-bold h6 text-danger" for="">Montant TTC
+                                </label>
+                                <div class="input-group">
+                                    <input name="ttc" type="text" class="form-control"  formControlName="ttc" readonly>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" style="border-radius: none; border: none">€</span>
+                                    </div>
+                                </div>                            
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-center">
+                        <button class="btn btn-outline-success mx-2">Valider</button>
+                        <button class="btn btn-outline-danger">Annuler</button>
+                    </div>
+                </form>
+                
+            </div>
+    </div>  
+    
+</div>
+
+

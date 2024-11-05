@@ -1,0 +1,33 @@
+
+<div class="container sticky">
+    <div *ngIf="chatbotOpen" class="chatbot-container" style="background-color: #fff;">
+        <div class="chat-header d-flex align-items-center justify-content-center">IrisBot TVA</div>
+        <div class="chat-messages">
+          <div *ngFor="let message of messages" class="w-100 d-flex" [ngClass]="{'box-user-message': message.sender === 'user', 'box-bot-message': message.sender === 'bot'}">
+            <div class="message" [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}">
+                {{ message.text }}
+            </div>            
+          </div>
+        </div>
+        <div class="chat-input">
+            <form class="form w-100">
+                <div class="container d-flex justify-content-between">
+                    <textarea class="form-control" (keydown.enter)="sendMessage()" placeholder="Pose ta question..."></textarea>
+                    <button class="ms-3 align-self-end btn btn-outline-light" (click)="sendMessage()">
+                        <i class="me-2 bi bi-send"></i>
+                        <span>Envoyer</span>                         
+                    </button>                
+                </div>
+                
+            </form>
+          
+        </div>
+    </div>
+    <div class="d-flex w-100 justify-content-end mt-2">
+        <button style="width: 60px; height:60px; font-size: 25px;" class="btn toggle-button rounded-circle d-flex align-items-center justify-content-center" (click)="toggleChatbot()">
+            <i *ngIf="chatbotOpen" class="bi bi-x-lg"></i>
+            <i *ngIf="!chatbotOpen" class="bi bi-chat-dots"></i>
+        </button>
+    </div>
+    
+</div>

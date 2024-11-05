@@ -1,0 +1,1 @@
+Le module shared est un shared component utilisé par presque toutes les pages de l'application

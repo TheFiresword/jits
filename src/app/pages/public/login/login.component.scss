@@ -1,0 +1,58 @@
+$left-margin-card-1: 0%;
+$width-card-left: 50%;
+$slope-card-1: 80%;
+$height: 100vh;
+
+
+.custom-background{
+    height: $height;
+    justify-content: center;
+    display: flex; 
+    align-items: center;
+    position: relative;
+    background-color: #f0f0f0;
+}
+.special-shape-left{
+    width: $width-card-left;
+    height: inherit;
+    background-image: url('./../../../../assets/JE.jpg');
+    background-size: cover;
+    clip-path: polygon(0 0, 100% 0, $slope-card-1 100%, 0 100%);
+    z-index: 1;
+    position: absolute;
+    left: $left-margin-card-1;
+}
+
+@media (min-width: 768px){
+    .special-shape-right{
+        height: inherit;
+        clip-path: polygon(calc(100% - $slope-card-1) 0, 100% 0, 100% 100%, 0 100%);
+        position: absolute;
+        left: calc($left-margin-card-1 + $width-card-left - (($width-card-left * (100% - $slope-card-1)) / 100%));
+        z-index: 2;
+        padding: 0;
+        overflow: hidden;
+    
+    }
+    .rectangle-inside{
+        width: 100%;
+        margin-left: calc(100% - $slope-card-1) ;
+        //background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 70%);
+          //border-radius: 15%;
+          //opacity: 0.97;
+          //box-shadow: 0 0 15px rgba(250, 92, 124, 0.9);
+          box-sizing: border-box;
+        
+          .card{
+            max-width: 360px;
+          }
+          .shadow-effect{
+            border: none;
+            box-shadow: 0 0 5px rgba(127, 127, 127, 0.99);
+        }
+    }
+}
+
+
+
+

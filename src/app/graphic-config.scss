@@ -1,0 +1,56 @@
+// Definition of some global variables available all along the project
+:root{
+    --bs-btn-color: #fff;
+
+    // Navbar
+    --ct-topbar-bg: #ffffff;
+    --ct-topbar-item-color: #7d6f6c;
+    --ct-topbar-item-hover-color: #fa5c7c;
+    --ct-topbar-search-bg: #f0f3f8;
+    --ct-topbar-user-bg: #fafafd;
+    --ct-topbar-user-border: #eef2f7;
+    --ct-box-shadow:  0px 0px 35px 0px rgba(154, 161, 171, 0.15);
+    --ct-topbar-height: 70px;
+    --ct-topbar-user-bg: #fafafd;
+
+    // Menus déroulants à affichage conditionnel
+    --ct-dropdown-color: #6c757d;
+    --ct-dropdown-bg: #fff;
+    --ct-dropdown-link-hover-color: #313539;
+    
+    //Logo
+    --ct-logo-height: 25px;
+
+    // Leftbar
+    --ct-leftbar-width: 260px;
+    --ct-menu-bg: #313a46;
+    --ct-menu-header-bg: #373f4a;
+    --ct-menu-item-color: #8391a2;
+    --ct-menu-item-hover-color: #bccee4;
+    --ct-menu-item-active-color: #ffffff;
+
+    // Body
+    --ct-body-font-family: "Nunito",sans-serif;
+    --ct-body-font-size: 0.9rem;
+    --ct-body-font-weight: 400;
+    --ct-bg-color:#f4f4f4;
+    --ct-body-color: #6c757d;
+    --ct-body-light-color: var(--ct-menu-item-active-color);
+    --ct-body-color-rgb: 108,117,125;
+    --ct-body-bg: #f2f3f7;
+
+    // Calendar
+    --fc-button-bg-color: var(--primary-color);
+    --fc-button-border-color: none;
+    --fc-button-hover-bg-color: var(--fc-button-bg-color);
+    --fc-button-hover-border-color: none;
+    --fc-button-active-bg-color: rgba(var(--secondary-color-rgb));
+    --fc-button-active-border-color: none;
+    
+    --fc-event-bg-color: var(--primary-color);
+    --fc-event-border-color: none;
+    --fc-list-event-dot-width: 10px;
+    --fc-list-event-hover-bg-color: ;
+    
+   // --mdc-theme-primary: var(--secondary-color);
+}

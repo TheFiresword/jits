@@ -1,0 +1,64 @@
+.statistics{
+    background-color: var(--ct-body-bg);
+    color: inherit;
+    width: fit-content;
+    border: none;
+}
+
+.tva-card{
+    max-width: 500px;
+    border: none;
+    .card-header{
+        height: 80px;
+    }
+    .badge{
+        border-radius: 4px;
+        font-size:12px;
+    }
+}
+.no-scroll{
+    overflow-x: hidden;
+}
+.sub-header{
+    font-size: 20px;
+}
+
+thead{
+    tr th:nth-child(2), tr th:nth-child(3){
+        width: 150px;
+    }
+}
+.limit-width{
+    margin: auto;
+    max-width: 1000px;
+}
+
+
+  
+.sidebar{
+    background-color: var(--ct-menu-bg)!important;
+    color: var(--ct-menu-item-color)!important;
+    height: 400px;
+    .lg-sidebar{
+        width: var(--ct-leftbar-width);
+    }
+    .sidebar-body{
+        .sidebar-nav-menu{
+            li.item {
+                margin: 2rem 0;
+                padding: 0 1rem;
+                :hover{
+                    color: var(--ct-menu-item-hover-color);
+                }
+            }
+            .item-active{
+                color: var(--ct-menu-item-active-color);
+            }
+        }
+    }
+}
+
+.plugin-card{
+    width: fit-content!important;
+    height: fit-content !important;
+}

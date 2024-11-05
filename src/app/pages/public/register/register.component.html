@@ -1,0 +1,166 @@
+<!-- registration-form.component.html -->
+<div class="d-flex page justify-content-center">
+  <div class="d-none d-lg-block side-image col"></div>
+
+  <div class="card ps-3 mt-5 mt-lg-0" style="max-width: 500px;">
+    <div class="card-header py-4 bg-transparent border-none">
+      <a routerLink="/dashboard">
+        <span>
+          <img alt="logo" height="50" src="./../../../../assets/logo.png">
+        </span>
+      </a>
+    </div>
+    <div class="card-body" style="max-width: 500px;">
+      <div class="m-auto mb-5">
+        <h4 class="pb-0 fw-bold text-dark-50">Inscription</h4>
+        <p class="text-muted">Génial, nous accueillons un nouveau membre!</p>
+      </div>
+      <form [formGroup]="registrationForm" (ngSubmit)="registrationForm.valid && onSubmit()" novalidate class="needs-validation form">
+        <div class="row mb-3">
+          <div class="col">
+            <div class="form-group">
+              <label class="form-label fw-bold" for="firstname">Prénom
+                <span *ngIf="monitorMandatoryInputs('firstname')">*</span>
+              </label>
+              <input placeholder="" name="firstname" type="text" class="form-control"  formControlName="firstname" required>
+              
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label class="form-label fw-bold" for="lastname">Nom
+                <span *ngIf="monitorMandatoryInputs('lastname')">*</span>
+              </label>
+              <input name="lastname" type="text" class="form-control" formControlName="lastname" required>
+            </div>
+          </div>
+        </div>
+    
+        <div class="form-group mb-3">
+          <label class="form-label fw-bold" for="email">Email
+            <span *ngIf="monitorMandatoryInputs('email')">*</span>
+          </label>
+          <input email type="email" class="form-control" formControlName="email" required>
+          <div class="invalid-feedback">Tu dois entrer ton mail INSA!</div>
+        </div>
+    
+        <div class="form-group mb-3">
+          <label  class="form-label fw-bold" for="password">Mot de passe
+            <span *ngIf="monitorMandatoryInputs('password')">*</span>
+          </label>
+          <input type="password" class="form-control" formControlName="password" required>
+          <div class="invalid-feedback">Le mot de passe doit comporter au moins 8 caractères!</div>
+        </div>
+    
+        <div class="form-group mb-3">
+          <label class="form-label fw-bold" for="phone">Téléphone
+            <span *ngIf="monitorMandatoryInputs('phone')">*</span>
+          </label>       
+          <input type="tel" class="form-control" formControlName="phone" name="phone">
+        </div>
+    
+        <div class="form-group mb-3">
+          <label  class="form-label fw-bold" for="adress">Adresse
+            <span *ngIf="monitorMandatoryInputs('adress')">*</span>
+          </label>
+          <input type="text" class="form-control" formControlName="adress" name="adress">
+        </div>
+    
+        <div class="row mb-3">
+          <div class="col">
+            <div class="form-group">
+              <label class="form-label fw-bold" for="zipCode">Code postal
+                <span *ngIf="monitorMandatoryInputs('zipCode')">*</span>
+              </label>
+              
+              <input type="text" class="form-control" formControlName="zipCode" name="zipCode">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label class="form-label fw-bold" for="city">Ville
+                <span *ngIf="monitorMandatoryInputs('city')">*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="city" name="city">
+            </div>
+          </div>
+        </div>
+    
+        <div class="form-group mb-3">
+          <label class="form-label fw-bold" for="year">Année
+            <span *ngIf="monitorMandatoryInputs('year')">*</span>
+          </label>
+          
+          <select class="form-select" aria-label="Year select" formControlName="year" name="year" required>
+              <option value="" selected>Choisir une année</option>
+              <option value="1">1A</option>
+              <option value="2">2A</option>
+              <option value="3">3A</option>
+              <option value="4">4A</option>
+              <option value="5">5A</option>
+          </select>
+          
+          
+        </div>
+    
+        <div class="form-group mb-3">
+          <label class="form-label fw-bold" for="department">Département
+            <span *ngIf="monitorMandatoryInputs('department')">*</span>
+          </label>
+          <select class="form-select" aria-label="Department select" formControlName="department" name="department" required>
+            <option value="" selected>Choisir un département</option>
+            <option value="ERE">ERE</option>
+            <option value="GSI">GSI</option>
+            <option value="MRI">MRI</option>
+            <option value="Paysage">Paysage</option>
+            <option value="STI">STI</option>
+          </select>
+        </div>
+    
+        <div class="form-group mb-3">
+          <label class="form-label fw-bold" for="campus">Campus
+            <span *ngIf="monitorMandatoryInputs('campus')">*</span>
+          </label>
+          <select class="form-select" aria-label="Campus select" formControlName="campus" name="campus" required>
+            <option value="" selected>Choisir un campus</option>
+            <option value="Blois">Blois</option>
+            <option value="Bourges">Bourges</option>
+          </select>
+        </div>
+  
+        <div class="form-group mb-3">
+          <label class="form-label fw-bold" for="campus">Poste à occuper
+            <span *ngIf="monitorMandatoryInputs('role')">*</span>
+          </label>
+          <select class="form-select" aria-label="Role select" formControlName="role" name="role" required>
+            <option value="" selected>Choisir un poste</option>
+            <optgroup *ngFor="let pole of getAvailablePoles(); index as i" [label]="getStringifiedAvailablePoles()[i]">
+              <option *ngFor="let role of getOnePoleRoles(pole)" [value]="role">
+                {{role}}
+              </option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="mb-3 mt-4 text-center rounded" style="background-color: #f0f3f8;">
+          <div *ngIf="!registrationForm.valid" class="text-danger fw-bold">Le champ {{findFirstInvalidField()}} n'est pas valide!</div>
+        </div>
+    
+        <button class="submit-btn btn my-bg-secondary cancel-bs-styles w-100 mt-5" [disabled]="!registrationForm.valid" type="submit">Inscription</button>   
+
+      </form>
+      <div class="row mt-3">
+        <div class="col-12 text-center">
+          <p class="text-muted">Déja inscrit(e) ?
+            <a [routerLink]="['/login']" class="text-muted ms-1">
+              <b>Connexion</b>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+  

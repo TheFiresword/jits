@@ -1,0 +1,35 @@
+<div class="col d-flex justify-content-between mb-5">
+    <button class="btn btn-outline-sc"><i class="bi bi-plus-circle-dotted me-2" (click)="userAction.emit({type:'add'})"></i>Ajouter une entrée</button>
+    <button class="btn btn-outline-sc" (click)="exportTable()">Exporter</button>
+</div>
+<table datatable [dtOptions]="dtOptions" class="table" [id]="tableId">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" *ngFor="let name of colsNames" [ngClass]="{'fixed_width': name ==='Avatar'}">
+                {{name}}
+            </th>
+            <th scope="col" style="width: 75px;">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of dataArray">
+            <td  *ngFor="let col of colsLabels">
+                <div *ngIf="helpers.isAvatar(row[col])">
+                    <img [src]=" row[col].path" alt="Avatar" class="avatar rounded-circle" height="50">                            
+                </div>
+                <span *ngIf="helpers.isText(row[col]) && !helpers.isDate(row[col])">{{ row[col]}}</span>
+                <span class="badge" *ngIf="helpers.isBoolean(row[col])" [ngClass]="{'my-text-success': row[col]===true, 'my-text-failure': row[col]===false}"> {{ row[col] ? 'Oui' : 'Non' }}</span> 
+                <span *ngIf="helpers.isNumber(row[col]) && !helpers.isInteger(row[col])">{{ row[col]| number:'1.2-2'}}</span>
+                <span *ngIf="helpers.isInteger(row[col])">{{ row[col]| number:'1.0-0'}}</span>
+                <span *ngIf="helpers.isDate(row[col])">{{ row[col] | date }}</span>
+            </td>
+            <td>
+                <div  class="table-action d-flex h-100" >
+                    <a (click)="userAction.emit({type:'details', target: row.id, tableType: tableType})" class="action-icon pe-2" style="color: inherit!important;"><i class="bi bi-eye"></i></a>
+                    <a (click)="userAction.emit({type:'modify', target: row.id, tableType: tableType})" class="action-icon pe-2" style="color: inherit!important;"> <i class="bi bi-pencil"></i></a>
+                    <a (click)="userAction.emit({type:'delete', target: row.id, tableType: tableType})" class="action-icon" style="color: inherit!important;"> <i class="bi bi-trash"></i></a>                    
+                </div>                
+            </td>            
+        </tr>
+    </tbody>
+</table>

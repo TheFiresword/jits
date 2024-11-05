@@ -1,0 +1,450 @@
+<div class="page ps-4 pe-4" id="page" style="position: relative;">
+    <div class="row d-flex align-items-center  label justify-content-between">
+        <div class="col">   
+            <h4>La trésorerie</h4>
+        </div>        
+    </div>
+    
+    <mat-tab-group class="" preserveContent >
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <i class="bi bi-table pe-2"></i>
+                Tableau de suivi [référence]                
+            </ng-template>
+              
+            <mat-tab-group class="mt-3 " color="accent" >                
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <i class="bi bi-cart3 pe-2"></i>
+                        Factures d'Achat
+                    </ng-template>
+
+                    <div class="mt-5">
+                        <div class="p-3" style="background-color: white">
+                            <div class="d-flex justify-content-between mb-4">
+                                <h4 class="">Liste des Achats</h4>
+                                <app-stats-card class="border border-light border-5" title="Total des dettes" [statistic]="debtsOnToday | currency: '€'" 
+                                iconClass="bi-wallet-fill" backColor="#fff" iconColor="#d2b48c" avatarColor="#fffaf0">
+                                </app-stats-card>
+                            </div>
+                            <ng-container *ngIf="purchases.length > 0">
+                                <app-datatable tableType="PurchaseInvoice" tableId="purchasesTable" [dataArray]="purchases" (userAction)="monitorAction($event)"></app-datatable>
+                            </ng-container>
+                        </div>
+                    </div>
+                </mat-tab>
+                
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <i class="bi bi-file-earmark-arrow-up pe-2"></i>
+                        Factures de vente
+                    </ng-template>
+                      <div class="mt-5">
+                        <div class="p-3" style="background-color: white">
+                            <div class="d-flex justify-content-between mb-4">
+                                <h4 class="">Liste des Ventes</h4>
+                                <app-stats-card  class="border border-light border-5" title="Total des créances clients" [statistic]="cstmerDebtsOnToday | currency: '€'" 
+                                iconClass="bi-wallet-fill" backColor="#fff" iconColor="#1abc9c" avatarColor="#e8f8f5">
+                                </app-stats-card>
+                            </div>
+                            <ng-container *ngIf="sales.length > 0">
+                                <app-datatable tableType="SaleInvoice" tableId="salesTable" [dataArray]="sales" (userAction)="monitorAction()"></app-datatable>
+                            </ng-container>
+                        </div>
+                      </div>
+                </mat-tab>
+
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <i class="bi bi-arrow-up-circle pe-2"></i>
+                        Autres produits
+                      </ng-template>
+                      <div class="mt-5">
+                        <div class="p-3" style="background-color: white">
+                            <div class="d-flex justify-content-between mb-4">
+                                <h4 class="">Autres produits</h4>
+                                <app-stats-card class="border border-light border-5" title="Total des créances autres clients" [statistic]="otherClientsDebtsOnToday | currency: '€'" 
+                                iconClass="bi-cash" backColor="#fff" iconColor="#e74c3c" avatarColor="#ffe6e6">
+                                </app-stats-card>
+                            </div>
+                            <ng-container *ngIf="otherSales.length > 0">
+                                <app-datatable tableType="otherSaleInvoice" tableId="otherSalesTable" [dataArray]="otherSales" (userAction)="monitorAction()"></app-datatable>
+                            </ng-container>
+                        </div>
+                      </div>
+                </mat-tab>
+
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <i class="bi bi-file-text pe-2"></i>
+                        TVA
+                      </ng-template>
+                      
+                      <div class="card tva-card mt-5" style="margin: auto;">
+                        <div class="card-header gradient-color" >
+                            <div class="d-flex align-items-center text-light justify-content-between h-100">
+                                <h4 class="card-title my-2">Récapitulatif de TVA pour le mois de: </h4>
+                                <div class="dropdown">
+                                    <button class="btn my-bg-primary text-light dropdown-toggle" type="button" id="dropdownMonth" data-bs-toggle="dropdown" aria-expanded="false">
+                                      {{tvaMonth}}
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMonth">
+                                      <li *ngFor="let month of months">
+                                        <a class="dropdown-item" (click)="changeMonth(month)">{{month}}</a>
+                                    </li>
+                                    </ul>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="row d-flex justify-content-start mb-3 ps-3">
+                                <button class="btn btn-outline-sc" (click)="exportTable('vatTable', 'TVA_'+ tvaMonth)" style="width: fit-content;">Exporter</button>
+                            </div>                            
+                            
+                            <table class="table w-100" id="vatTable">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="row">Métriques</th>
+                                        <th scope="row">Valeurs</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Base HT des produits soumis à TVA</td>
+                                        <td><span class="badge my-bg-primary">{{vatMetrics.productsLiableToVat | number:'1.2-2'}}€</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Base HT des produits non soumis à la TVA</td>
+                                        <td><span class="badge my-bg-secondary">{{vatMetrics.productsNonLiableToVat | number:'1.2-2'}}€</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total TVA collectée</td>
+                                        <td><span class="badge my-bg-primary">{{vatMetrics.collectedVat | number:'1.2-2'}}€</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total TVA déductible</td>
+                                        <td><span class="badge my-bg-secondary">{{vatMetrics.deductibleVat | number:'1.2-2'}}€</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Report du crédit de TVA du mois précédent</td>
+                                        <td><span class="badge my-bg-primary">{{vatMetrics.lastCreditReport | number:'1.2-2'}}€</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>TVA à décaisser</td>
+                                        <td><span class="badge my-bg-secondary">{{vatMetrics.vatToPay | number:'1.2-2'}}€</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Crédit de TVA à reporter</td>
+                                        <td><span class="badge my-bg-primary">{{vatMetrics.creditToReport | number:'1.2-2'}}€</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                      </div>
+                </mat-tab>
+
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <i class="bi bi-cash-coin pe-2"></i>
+                        BV&RM
+                      </ng-template>
+                </mat-tab>
+                
+                
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <i class="bi bi-building pe-2"></i>
+                        URSSAF
+                      </ng-template>
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <i class="bi bi-file-text pe-2"></i>
+                        Cut-Off
+                      </ng-template>
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <i class="bi bi-file-text pe-2"></i>
+                        DADS-DAS2
+                      </ng-template>
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <i class="bi bi-bar-chart pe-2"></i>
+                        Budget
+                      </ng-template>
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <i class="bi bi-percent pe-2"></i>
+                        Taux de cotisation
+                    </ng-template>
+                    <div class="mt-5 limit-width">                                                                                            
+                        <div class="card mt-5" *ngFor="let ratePlan of taxRates">                            
+                            <div class="card-header gradient-color">
+                                <div class="d-flex align-items-center text-light justify-content-between h-100">
+                                    <h4 class="card-title my-2">{{ratePlan.label}} </h4>
+                                </div>
+                            </div>
+                            <div class="card-body p-3">
+                                <div class="row d-flex justify-content-between mb-3 px-3">
+                                    <button class="btn btn-outline-sc" (click)="exportTable('vatTable', 'TVA_'+ tvaMonth)" style="width: fit-content;">Exporter</button>
+                                    <button class="btn btn-outline-sc" style="width: fit-content;" data-bs-toggle="collapse" data-bs-target="#taxRatescollapse">Mettre à jour</button>
+                                </div>
+                                
+                                
+                                <div class="collapse bg-light m-auto" id="taxRatescollapse" style="max-width: 500px;">
+                                    <div class="card"></div>
+                                    <div class="card-header d-flex justify-content-between align-items-center" style="color: var(--ct-body-color)!important;">
+                                        <h4 class="mt-2">{{ratePlan.label}}</h4>
+                                        <button type="button"  class="btn-close text-reset cancel-bs-styles" (click)="closeCollapse()"></button>
+                                    </div>
+                                    <div class="card-body" style="color: var(--ct-body-color)!important;">
+                                        <form [formGroup]="changeRateForm" novalidate class="needs-validation form">
+                                            
+                                            <div class="row row-cols-2 g-2">
+                                                <div class="form-group mb-3">
+                                                    <label class="form-label fw-bold" for="smic">Smic {{today.year}}
+                                                    </label>
+                                                    <input [placeholder]="ratePlan.smic | currency: '€'" name="smic" type="number" class="form-control"  formControlName="smic">                                  
+                                                </div>   
+                
+                                                <div class="form-group mb-3">
+                                                    <label class="form-label fw-bold" for="securiteSocialeEtu">Sécurité sociale (Part étudiante)
+                                                    </label>
+                                                    <input [placeholder]="ratePlan.securiteSociale.etudiant | percent: '1.2-2'" name="securiteSocialeEtu" type="number" class="form-control"  formControlName="securiteSocialeEtu">                                     
+                                                </div>
+                                
+                                                <div class="form-group mb-3">
+                                                    <label class="form-label fw-bold" for="accidentTravailJunior">Accident du travail (Part junior)
+                                                    </label>
+                                                    <input [placeholder]="ratePlan.accidentTravail.junior | percent: '1.2-2'" name="accidentTravailJunior" type="number" class="form-control"  formControlName="accidentTravailJunior">                                  
+                                                </div>
+                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                
+                                            <div class="form-group text-center mt-4 d-flex justify-content-between">
+                                                <div class="d-flex gap-2 col-8">
+                                                    <button class="btn bg-danger text-white cancel-bs-styles" (click)="closeCollapse()">Annuler</button>                                                
+                                                </div>                            
+                                                    <button class="btn bg-success text-white cancel-bs-styles" [disabled]="!changeRateForm.valid" (click)="changeRateForm.valid && onSubmitChangeRates(ratePlan.label)" type="submit">Valider</button>                
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+
+                                <table class="table w-100">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="row">Côtisation sociale</th>
+                                            <th scope="row">Part junior</th>
+                                            <th scope="row">Part étudiant</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="sub-header">Taux indexés sur l'assiette de cotisation</td>
+                                            <td class="sub-header"><span>{{ratePlan.tauxAssietteCotisation.junior | percent: '1.2-2'}}</span></td>
+                                            <td class="sub-header"><span>{{ratePlan.tauxAssietteCotisation.etudiant | percent: '1.2-2'}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>C.R.D.S (Contribution au remboursement de la dette sociale) + CSG non déductible</td>
+                                            <td><span>{{ratePlan.crds.junior | percent: '1.2-2'}}</span></td>
+                                            <td><span>{{ratePlan.crds.etudiant | percent: '1.2-2'}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>C.S.G (Contribution Sociale Généralisée)</td>
+                                            <td><span>{{ratePlan.csg.junior | percent: '1.2-2'}}</span></td>
+                                            <td><span>{{ratePlan.csg.etudiant | percent: '1.2-2'}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sécurité sociale</td>
+                                            <td><span>{{ratePlan.securiteSociale.junior | percent: '1.2-2'}}</span></td>
+                                            <td><span>{{ratePlan.securiteSociale.etudiant | percent: '1.2-2'}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Assurance vieillesse</td>
+                                            <td><span>{{ratePlan.assuranceVieilesse.junior | percent: '1.2-2'}}</span></td>
+                                            <td><span>{{ratePlan.assuranceVieilesse.junior | percent: '1.2-2'}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Déplafonnée</td>
+                                            <td><span>{{ratePlan.deplafonnee.junior | percent: '1.2-2'}}</span></td>
+                                            <td><span>{{ratePlan.deplafonnee.etudiant | percent: '1.2-2'}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Plafonnée TA</td>
+                                            <td><span>{{ratePlan.plafonnee.junior | percent: '1.2-2'}}</span></td>
+                                            <td><span>{{ratePlan.plafonnee.etudiant | percent: '1.2-2'}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Accident du travail</td>
+                                            <td><span>{{ratePlan.accidentTravail.junior | percent: '1.2-2'}}</span></td>
+                                            <td><span>{{ratePlan.accidentTravail.etudiant | percent: '1.2-2'}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Allocations familliales</td>
+                                            <td><span>{{ratePlan.allocationsFamilliales.junior | percent: '1.2-2'}}</span></td>
+                                            <td><span>{{ratePlan.allocationsFamilliales.etudiant | percent: '1.2-2'}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Versement Transport</td>
+                                            <td><span>{{ratePlan.versementTransport.junior | percent: '1.2-2'}}</span></td>
+                                            <td><span>{{ratePlan.versementTransport.etudiant | percent: '1.2-2'}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Autres contributions dues par la Junior</td>
+                                            <td><span>{{ratePlan.autresContributions.junior | percent: '1.2-2'}}</span></td>
+                                            <td><span>{{ratePlan.autresContributions.etudiant | percent: '1.2-2'}}</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <table class="mt-4 table w-100">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="row">Côtisation sociale</th>
+                                            <th scope="row">Part junior</th>
+                                            <th scope="row">Part étudiant</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="sub-header">Taux indexés sur la rétribution brute</td>
+                                            <td class="sub-header"><span>{{ratePlan.assuranceChomage.junior | percent: '1.2-2'}}</span></td>
+                                            <td class="sub-header"><span>{{ratePlan.assuranceChomage.junior | percent: '1.2-2'}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Assurance chômage</td>
+                                            <td><span>{{ratePlan.tauxRetributionBrute.junior | percent: '1.2-2'}}</span></td>
+                                            <td><span>{{ratePlan.tauxRetributionBrute.etudiant | percent: '1.2-2'}}</span></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>    
+                    </div>                      
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <i class="bi bi-gear pe-2"></i>
+                        Paramétrage
+                      </ng-template>
+                      <div class="mt-5 limit-width"></div>
+                </mat-tab>
+            </mat-tab-group>              
+        </mat-tab>
+                
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <i class="bi bi-gear-fill pe-2"></i>
+                Process
+            </ng-template>
+            
+            <div class="mt-5 limit-width">
+                <div class="row"><h4>Quelques remarques</h4></div>
+                <div class="row row-cols-4 g-4">
+                    <app-stats-card class="plugin-card" title="1" statistic="Il suffit de cliquer sur le nom d'un process pour le visualiser en détails" 
+                    iconClass="bi-info-lg" backColor="#fff" iconColor="#d2b48c" avatarColor="#fffaf0">
+                    </app-stats-card>
+                    <app-stats-card class="plugin-card" title="2" statistic="Les books de trésorerie et ces process sont complémentaires" 
+                    iconClass="bi-info-lg" backColor="#fff" iconColor="#1abc9c" avatarColor="#e8f8f5">
+                    </app-stats-card>
+                    <app-stats-card class="plugin-card" title="3" statistic="Mettre à jour régulièrement ces process" 
+                    iconClass="bi-info-lg" backColor="#fff" iconColor="#e74c3c" avatarColor="#ffe6e6">
+                    </app-stats-card>
+                    <app-stats-card class="plugin-card" title="4" statistic="Lorsqu'il est mention d'aller sur un site, le lien du site est renseigné et accessible directement" 
+                    iconClass="bi-info-lg" backColor="#fff" iconColor="#3498db" avatarColor="rgba(52, 152, 219, 0.3)">
+                    </app-stats-card>
+                </div>
+                <div class="mt-3">
+                    <iframe frameborder="0" style="width:100%;height:1131px;" 
+                        src="https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=https%3A%2F%2Fapp.diagrams.net%2F%3Fclient%3D1%23G1eUlvgt91FfCynLifWGj73g4RQJ_BtMbu%23%257B%2522pageId%2522%253A%2522EXGBFHllm3A5D1Mgq3uy%2522%257D&layers=1&nav=1&title=tresorerie.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1eUlvgt91FfCynLifWGj73g4RQJ_BtMbu%26export%3Ddownload">
+                    </iframe>
+                </div>
+            </div>
+        </mat-tab>
+
+
+        <mat-tab >
+            <ng-template mat-tab-label>
+                <i class="bi bi-clipboard-data pe-2"></i>
+                Analyse de données
+            </ng-template>
+                        
+            <div class="mt-5 no-scroll d-flex justify-content-center" >
+                <!--Visualisation de données-->
+                <div class="d-flex justify-content-between">
+                    <!--Courbe CA-->
+                    <app-monthly-sales-plot></app-monthly-sales-plot>
+                    <!--Cards statistiques-->
+                    <div class="col ms-4">
+                        <div class="row row-cols-2 g-1">
+                            <app-stats-card style="width: fit-content;" class="border border-light border-2" title="Délai moyen de paiement des clients" statistic="15 jours" 
+                            iconClass="bi-credit-card" backColor="#fff" iconColor="#3498db" avatarColor="#e6f7ff">
+                            </app-stats-card>
+                            <app-stats-card style="width: fit-content;" class="border border-light border-2" title="Délai moyen de paiement des fournisseurs" statistic="5 jours" 
+                            iconClass="bi-credit-card" backColor="#fff" iconColor="#1abc9c" avatarColor="#e8f8f5">
+                            </app-stats-card>
+                            <app-stats-card style="width: fit-content;" class="border border-light border-2" title="Marge brute moyenne par projet" statistic="25€" 
+                            iconClass="bi-credit-card" backColor="#fff" iconColor="#3498db" avatarColor="#e6f7ff">
+                            </app-stats-card>
+                        </div>
+                    </div>
+                                        
+                </div>                
+            </div>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <i class="bi bi-lightning pe-2"></i>
+                Outils d'automatisation
+            </ng-template>
+            
+            <div class="mt-5 no-scroll d-flex justify-content-center">
+                <div class="sidebar mt-5 me-4 col-2">
+                    <div class="px-4 lg-sidebar">
+                        <div class="sidebar-body pt-3">
+                            <ul class="sidebar-nav-menu ps-0">
+                                <li class="title" >
+                                    <h6 class="text-uppercase">Déclaratifs</h6>
+                                </li>
+                                <li class="item">
+                                    <div class="d-flex gap-3" (click)="toogleTvaDeclForm()" role="button" >
+                                        <i class="bi bi-arrow-right-circle"></i>
+                                        <span>TVA</span>
+                                    </div>                    
+                                </li>
+                                <li class="item">
+                                    <div class="d-flex gap-3" role="button">
+                                        <i class="bi bi-arrow-right-circle"></i>
+                                        <span>BRC</span>
+                                    </div>                    
+                                </li>
+                                <li class="item">
+                                    <div class="d-flex gap-3" role="button">
+                                        <i class="bi bi-arrow-right-circle"></i>
+                                        <span>DADS&DAS-2</span>
+                                    </div>                    
+                                </li>                            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5 mb-3 col">        
+                    <app-tva-declaratif class="collapse show" id="vat-decl"></app-tva-declaratif>
+                </div> 
+                <div class="mt-5 ms-3">
+                    <app-chat-bot style="position: fixed; right:20px; bottom:20px; z-index: 50;"></app-chat-bot>
+                </div>                                                              
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    
+</div>

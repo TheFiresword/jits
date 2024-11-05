@@ -1,0 +1,1 @@
+Le dossier pages contient tous les components associés aux différentes pages de l'application
