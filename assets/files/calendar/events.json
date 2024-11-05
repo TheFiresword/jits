@@ -1,0 +1,123 @@
+[
+    {
+        "id": "2",
+        "start": "",
+        "end": "",
+        "backgroundColor": "rgb(118, 120, 237)",
+        "title": "Réunion tréso",
+        "description": "Réunion du pôle trésorerie sur les missions",
+        "poleLinkedTo": "Trésorerie",
+        "eventCategory": "Réunion",
+        "reccurent": true,
+        "rrule": {
+            "freq": "weekly",
+            "interval": 2,
+            "dtstart": "2023-08-01",
+            "until": "2024-08-01",
+            "byweekday": [2, 3]
+        },
+
+        "extendedProps":{                        
+            "rrule": {
+                "freq": "weekly",
+                "interval": 2,
+                "dtstart": "2023-08-01",
+                "until": "2024-08-01",
+                "byweekday": [2, 3]
+            }
+        }                        
+        
+    },
+    {
+        "id": "1",
+        "start": "2023-07-08",
+        "end": "2023-07-09",
+        "title": "Conseil d'administration",
+        "reccurent": false,
+        "poleLinkedTo": "Tous",
+        "eventCategory": "Réunion",
+        "backgroundColor": "rgb(42, 157, 143)"
+    },
+    
+    {
+        "id": "3",
+        "start": "2023-07-09",
+        "end": "2023-07-10",
+        "title": "Réunion BR",
+        "reccurent": false,
+        "poleLinkedTo": "Trésorerie",
+        "eventCategory": "Réunion",
+        "backgroundColor": "rgb(58, 134, 255)"
+    },
+    {
+        "id": "4",
+        "start": "2023-07-10",
+        "end": "2023-07-11",
+        "title": "Réunion BR",
+        "reccurent": false,
+        "poleLinkedTo": "Trésorerie",
+        "eventCategory": "Réunion",
+        "backgroundColor": "rgb(224, 122, 95)"
+    },
+
+    {
+        "id": "5",
+        "start": "2023-07-02",
+        "end": "2023-07-03",
+        "title": "Réunion BR",
+        "reccurent": false,
+        "poleLinkedTo": "Trésorerie",
+        "eventCategory": "Réunion",
+        "backgroundColor": "rgb(71, 90, 115)"
+    },
+    {
+        "id": "6",
+        "start": "2023-07-03",
+        "end": "2023-07-04",
+        "title": "Réunion BR",
+        "reccurent": false,
+        "poleLinkedTo": "Trésorerie",
+        "eventCategory": "Réunion",
+        "backgroundColor": "rgb(250, 92, 124)"
+    },
+    {
+        "id": "7",
+        "start": "2023-07-04",
+        "end": "2023-07-05",
+        "title": "Réunion BR",
+        "reccurent": false,
+        "poleLinkedTo": "Trésorerie",
+        "eventCategory": "Réunion",
+        "backgroundColor": "rgb(86, 82, 100)"
+    },
+    {
+        "id": "8",
+        "start": "2023-07-05",
+        "end": "2023-07-06",
+        "title": "Réunion BR",
+        "reccurent": false,
+        "poleLinkedTo": "Trésorerie",
+        "eventCategory": "Réunion",
+        "backgroundColor": "rgb(8, 65, 92)"
+    },
+    {
+        "id": "9",
+        "start": "2023-07-06",
+        "end": "2023-07-07",
+        "title": "Réunion BR",
+        "reccurent": false,
+        "poleLinkedTo": "Trésorerie",
+        "eventCategory": "Réunion",
+        "backgroundColor": "rgb(204, 41, 54)"
+    },
+    {
+        "id": "10",
+        "start": "2023-07-07",
+        "end": "2023-07-08",
+        "title": "Réunion BR",
+        "reccurent": false,
+        "poleLinkedTo": "Trésorerie",
+        "eventCategory": "Réunion",
+        "backgroundColor": "rgb(181, 101, 118)"
+    }
+]

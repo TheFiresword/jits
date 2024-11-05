@@ -1,0 +1,97 @@
+[
+    {
+        "id": "INSA SUBVENTION 2021",
+        "budgetPart": "",
+        "label": "Suvenvtions FSDIE Novembre 2021 330€",
+        "localization": "Metropole",
+        "emitDate": "2021-03-07",
+        "dueDate": "2022-01-04",
+        "exludingTaxes": 330.0,
+        "vatToCollect": null,
+        "allTaxesIncluded": 330.0,
+        "paymentDate": "2022-04-01",
+        "daysLate": null,
+        "tvaDeclarationPeriod": "Avril",
+        "accountingSale": true,
+        "accountingBank": true,
+        "comments": "",
+        "relaunchStep": null
+    },
+    {
+        "id": "CA 2022",
+        "budgetPart": "",
+        "label": "Opération interne banque 3,90€",
+        "localization": "Metropole",
+        "emitDate": "2022-01-11",
+        "dueDate": "2022-01-11",
+        "exludingTaxes": 3.9,
+        "vatToCollect": null,
+        "allTaxesIncluded": 3.9,
+        "paymentDate": "2022-01-11",
+        "daysLate": null,
+        "tvaDeclarationPeriod": "Avril",
+        "accountingSale": true,
+        "accountingBank": true,
+        "comments": "Réglé",
+        "relaunchStep": null
+    },
+    {
+        "id": "CA Intérêts 2022",
+        "budgetPart": "",
+        "label": "Intérêts parts sociales Crédit Agricole",
+        "localization": "Metropole",
+        "emitDate": "2022-05-10",
+        "dueDate": "2021-05-10",
+        "exludingTaxes": 0.26,
+        "vatToCollect": null,
+        "allTaxesIncluded": 0.26,
+        "paymentDate": "2022-05-10",
+        "daysLate": null,
+        "tvaDeclarationPeriod": "Juillet",
+        "accountingSale": true,
+        "accountingBank": true,
+        "comments": "Réglé",
+        "relaunchStep": null
+    },
+    {
+        "id": "INSA SUBVENTION 2022",
+        "budgetPart": "",
+        "label": "Suvenvtions FSDIE Octobre 2022 250€",
+        "localization": "Metropole",
+        "emitDate": "2022-10-26",
+        "dueDate": "2022-01-04",
+        "exludingTaxes": 250.0,
+        "vatToCollect": null,
+        "allTaxesIncluded": 250.0,
+        "paymentDate": "2022-12-12",
+        "daysLate": null,
+        "tvaDeclarationPeriod": "Janvier",
+        "accountingSale": true,
+        "accountingBank": true,
+        "comments": "Réglé",
+        "relaunchStep": null
+    },
+    {
+        "id": "TRANSFERT TOMBOLA",
+        "budgetPart": "",
+        "label": "Transfert fonds récoltés pendant la tombola 424,10€",
+        "localization": "Metropole",
+        "emitDate": "2022-12-30",
+        "dueDate": "2022-12-30",
+        "exludingTaxes": 424.1,
+        "vatToCollect": null,
+        "allTaxesIncluded": 424.1,
+        "paymentDate": "2022-12-30",
+        "daysLate": null,
+        "tvaDeclarationPeriod": "Janvier",
+        "accountingSale": true,
+        "accountingBank": true,
+        "comments": "Les fonds ont été récoltés sur le compte Lyfpay d'un membre de la Junior puis transférés par virement bancaire (parce que l'asso n'avait pas de compte professionnel dédié)",
+        "relaunchStep": null
+    }
+    
+    
+    
+    
+    
+]

@@ -1,0 +1,60 @@
+[
+    {
+        "label": "Taux A",
+        "smic": 11.27,
+        "baseUrssaf": 45.08,
+        "tauxAssietteCotisation": {
+            "junior": 0.2987,
+            "etudiant": 0.17
+        },
+        "crds": {
+            "junior": 0.00,
+            "etudiant":0.029
+        },
+        "csg": {
+            "junior": 0.00,
+            "etudiant": 0.068
+        },
+        "securiteSociale": {
+            "junior": 0.13,
+            "etudiant": 0.00
+        },
+        "assuranceVieilesse": {
+            "junior": 0.00,
+            "etudiant": 0.00
+        },
+        "deplafonnee": {
+            "junior": 0.019,
+            "etudiant": 0.004
+        },
+        "plafonnee": {
+            "junior": 0.0855,
+            "etudiant": 0.069
+        },
+        "accidentTravail": {
+            "junior": 0.00750,
+            "etudiant": 0.00
+        },
+        "allocationsFamilliales": {
+            "junior": 0.052,
+            "etudiant": 0.00
+        },
+        "versementTransport": {
+            "junior": 0.00,
+            "etudiant": 0.00
+        },
+
+        "tauxRetributionBrute": {
+            "junior": 0.042,
+            "etudiant": 0.00
+        },
+        "autresContributions": {
+            "junior": 0.00416,
+            "etudiant": 0.00
+        },
+        "assuranceChomage": {
+            "junior": 0.042,
+            "etudiant": 0.00
+        }
+    }
+]

@@ -1,0 +1,24 @@
+[
+    {
+        "id": "ORDUCENTRE Acompte",
+        "studyRef": "ORDUCENTRE01",
+        "label": "Acompte Etude Or du Centre",
+        "localization": "Metropole",
+        "clientStatus": "Assujeti",
+        "emitDate": "2022-03-21",
+        "dueDate": "2022-04-21",
+        "htJeh": 820.0,
+        "htCosts": 40.0,
+        "htTotal": 860.0,
+        "vatToCollect": 172.0,
+        "allTaxesIncluded": 1032.0,
+        "paymentDate": "2022-07-02",
+        "daysLate": 0,
+        "tvaDeclarationPeriod": "Octobre",
+        "accountingSale": true,
+        "accountingBank": false,
+        "comments": "Réglé",
+        "relaunchStep": null
+    }
+      
+]

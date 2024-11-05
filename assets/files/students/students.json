@@ -1,0 +1,102 @@
+[
+    {
+        "id": 1,
+        "firstname": "Junior",
+        "lastname": "Sedogbo",
+        "email": "junior.sedogbo@insa-cvl.fr",
+        "password": "junior",
+        "phone": "",
+        "address": "10 rue de la Villette",
+        "zipCode": "25000",
+        "city": "Vendôme",
+        "year": "4A",
+        "department": "STI",
+        "campus": "Bourges",
+        "role": "Trésorier",
+        "myfiles": [
+          {
+            "id": 1,
+            "name": "data.json",
+            "path": "/assets/files/data.json",
+            "type": "other",
+            "owner": null
+          },
+          {
+            "id": 2,
+            "name": "IRIS INSA - DECLARATION IS 31 DECEMBRE 2022[15540].pdf",
+            "path": "/assets/files/myFiles/IRIS INSA - DECLARATION IS 31 DECEMBRE 2022[15540].pdf",
+            "type": "pdf",
+            "owner": null
+          },
+          {
+            "id": 3,
+            "name": "IRIS INSA - DECLARATION TVA 1T2022 RECTIFICATIVE[15542].pdf",
+            "path": "/assets/files/myFiles/IRIS INSA - DECLARATION TVA 1T2022 RECTIFICATIVE[15542].pdf",
+            "type": "pdf",
+            "owner": null
+          }
+        ]
+    },
+    {
+        "id": 2,
+        "firstname": "Alice",
+        "lastname": "Smith",
+        "email": "alice.smith@insa-cvl.fr",
+        "password": "alice123",
+        "phone": "123-456-7890",
+        "address": "123 Main Street",
+        "zipCode": "98765",
+        "city": "Springfield",
+        "year": "3A",
+        "department": "MRI",
+        "campus": "Bourges",
+        "role": "Secrétaire",
+        "myfiles": [
+          {
+            "id": 4,
+            "name": "project-report.docx",
+            "path": "/assets/files/project-report.docx",
+            "type": "word",
+            "owner": null
+          },
+          {
+            "id": 5,
+            "name": "presentation.pptx",
+            "path": "/assets/files/presentation.pptx",
+            "type": "powerpoint",
+            "owner": null
+          }
+        ]
+    },
+    {
+        "id": 3,
+        "firstname": "Benoit",
+        "lastname": "Raudinet",
+        "email": "benoit.raudinet@insa-cvl.fr",
+        "password": "benoit",
+        "phone": "123-456-7890",
+        "address": "123 Main Street",
+        "zipCode": "98765",
+        "city": "Springfield",
+        "year": "2A",
+        "department": "GSI",
+        "campus": "Blois",
+        "role": "Chargé Ressources Humaines",
+        "myfiles": [
+          {
+            "id": 4,
+            "name": "project-report.docx",
+            "path": "/assets/files/project-report.docx",
+            "type": "word",
+            "owner": null
+          },
+          {
+            "id": 5,
+            "name": "presentation.pptx",
+            "path": "/assets/files/presentation.pptx",
+            "type": "powerpoint",
+            "owner": null
+          }
+        ]
+    }      
+]
